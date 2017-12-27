@@ -5,30 +5,474 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-        <meta name="keywords" content="Template, html, premium, themeforest" />
-        <meta name="description" content="Traveler - Premium template for travel companies">
-        <meta name="author" content="Tsoy">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <!-- GOOGLE FONTS -->
-        <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700' rel='stylesheet' type='text/css'>
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600' rel='stylesheet' type='text/css'>
-        <!-- /GOOGLE FONTS -->
-        <link rel="stylesheet" href="css/bootstrap.css">
-        <link rel="stylesheet" href="css/font-awesome.css">
-        <link rel="stylesheet" href="css/icomoon.css">
-        <link rel="stylesheet" href="css/styles.css">
-        <link rel="stylesheet" href="css/mystyles.css">
-        <script src="js/modernizr.js"></script>
-    </head>
-    <body>
-        <jsp:include page="header.jsp"></jsp:include>
+<head>
+    <title>Traveler - Hotel details 3</title>
+
+
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta name="keywords" content="Template, html, premium, themeforest" />
+    <meta name="description" content="Traveler - Premium template for travel companies">
+    <meta name="author" content="Tsoy">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- GOOGLE FONTS -->
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600' rel='stylesheet' type='text/css'>
+    <!-- /GOOGLE FONTS -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/mystyles.css">
+    <script src="js/modernizr.js"></script>
+
+
+</head>
+
+<body>
+
+    <!-- FACEBOOK WIDGET -->
+    <div id="fb-root"></div>
+    <script>
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <!-- /FACEBOOK WIDGET -->
+    <div class="global-wrap">
+        <header id="main-header">
+            <div class="header-top">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <a class="logo" href="index.html">
+                                <img src="img/logo-invert.png" alt="Image Alternative text" title="Image Title" />
+                            </a>
+                        </div>
+                        <div class="col-md-3 col-md-offset-2">
+                            <form class="main-header-search">
+                                <div class="form-group form-group-icon-left">
+                                    <i class="fa fa-search input-icon"></i>
+                                    <input type="text" class="form-control">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="top-user-area clearfix">
+                                <ul class="top-user-area-list list list-horizontal list-border">
+                                    <li class="top-user-area-avatar">
+                                        <a href="user-profile.html">
+                                            <img class="origin round" src="img/40x40.png" alt="Image Alternative text" title="AMaze" />Hi, John</a>
+                                    </li>
+                                    <li><a href="#">Sign Out</a>
+                                    </li>
+                                    <li class="nav-drop"><a href="#">USD $<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                                        <ul class="list nav-drop-menu">
+                                            <li><a href="#">EUR<span class="right">€</span></a>
+                                            </li>
+                                            <li><a href="#">GBP<span class="right">£</span></a>
+                                            </li>
+                                            <li><a href="#">JPY<span class="right">円</span></a>
+                                            </li>
+                                            <li><a href="#">CAD<span class="right">$</span></a>
+                                            </li>
+                                            <li><a href="#">AUD<span class="right">A$</span></a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="top-user-area-lang nav-drop">
+                                        <a href="#">
+                                            <img src="img/flags/32/uk.png" alt="Image Alternative text" title="Image Title" />ENG<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i>
+                                        </a>
+                                        <ul class="list nav-drop-menu">
+                                            <li>
+                                                <a title="German" href="#">
+                                                    <img src="img/flags/32/de.png" alt="Image Alternative text" title="Image Title" /><span class="right">GER</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a title="Japanise" href="#">
+                                                    <img src="img/flags/32/jp.png" alt="Image Alternative text" title="Image Title" /><span class="right">JAP</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a title="Italian" href="#">
+                                                    <img src="img/flags/32/it.png" alt="Image Alternative text" title="Image Title" /><span class="right">ITA</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a title="French" href="#">
+                                                    <img src="img/flags/32/fr.png" alt="Image Alternative text" title="Image Title" /><span class="right">FRE</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a title="Russian" href="#">
+                                                    <img src="img/flags/32/ru.png" alt="Image Alternative text" title="Image Title" /><span class="right">RUS</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a title="Korean" href="#">
+                                                    <img src="img/flags/32/kr.png" alt="Image Alternative text" title="Image Title" /><span class="right">KOR</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="nav">
+                    <ul class="slimmenu" id="slimmenu">
+                        <li><a href="index.html">Home</a>
+                            <ul>
+                                <li><a href="index.html">Default</a>
+                                </li>
+                                <li><a href="index-1.html">Layout 1</a>
+                                </li>
+                                <li><a href="index-2.html">Layout 2</a>
+                                </li>
+                                <li><a href="index-3.html">Layout 3</a>
+                                </li>
+                                <li><a href="index-4.html">Layout 4</a>
+                                </li>
+                                <li><a href="index-5.html">Layout 5</a>
+                                </li>
+                                <li><a href="index-6.html">Layout 6</a>
+                                </li>
+                                <li><a href="index-7.html">Layout 7</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a href="success-payment.html">Pages</a>
+                            <ul>
+                                <li><a href="success-payment.html">Success Payment</a>
+                                </li>
+                                <li><a href="user-profile.html">User Profile</a>
+                                    <ul>
+                                        <li><a href="user-profile.html">Overview</a>
+                                        </li>
+                                        <li><a href="user-profile-settings.html">Settings</a>
+                                        </li>
+                                        <li><a href="user-profile-photos.html">Photos</a>
+                                        </li>
+                                        <li><a href="user-profile-booking-history.html">Booking History</a>
+                                        </li>
+                                        <li><a href="user-profile-cards.html">Cards</a>
+                                        </li>
+                                        <li><a href="user-profile-wishlist.html">Wishlist</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a href="blog.html">Blog</a>
+                                    <ul>
+                                        <li><a href="blog.html">Sidebar Right</a>
+                                        </li>
+                                        <li><a href="blog-sidebar-left.html">Sidebar Left</a>
+                                        </li>
+                                        <li><a href="blog-full-width.html">Full Width</a>
+                                        </li>
+                                        <li><a href="blog-post.html">Post</a>
+                                            <ul>
+                                                <li><a href="blog-post.html">Sidebar Right</a>
+                                                </li>
+                                                <li><a href="blog-post-sidebar-left.html">Sidebar Left</a>
+                                                </li>
+                                                <li><a href="blog-post-full-width.html">Full Width</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a href="404.html">404 page</a>
+                                </li>
+                                <li><a href="contact-us.html">Contact Us</a>
+                                </li>
+                                <li><a href="about.html">About</a>
+                                </li>
+                                <li><a href="login-register.html">Login/Register</a>
+                                    <ul>
+                                        <li><a href="login-register.html">Full Page</a>
+                                        </li>
+                                        <li><a href="login-register-normal.html">Normal</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a href="loading.html">Loading</a>
+                                </li>
+                                <li><a href="comming-soon.html">Comming Soon</a>
+                                </li>
+                                <li><a href="gallery.html">Gallery</a>
+                                    <ul>
+                                        <li><a href="gallery.html">4 Columns</a>
+                                        </li>
+                                        <li><a href="gallery-3-col.html">3 columns</a>
+                                        </li>
+                                        <li><a href="gallery-2-col.html">2 columns</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a href="page-full-width.html">Full Width</a>
+                                </li>
+                                <li><a href="page-sidebar-right.html">Sidebar Right</a>
+                                </li>
+                                <li><a href="page-sidebar-left.html">Sidebar Left</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a href="feature-typography.html">Features</a>
+                            <ul>
+                                <li><a href="feature-typography.html">Typography</a>
+                                </li>
+                                <li><a href="feature-icons.html">Icons</a>
+                                </li>
+                                <li><a href="feature-forms.html">Forms</a>
+                                </li>
+                                <li><a href="feature-icon-effects.html">Icon Effects</a>
+                                </li>
+                                <li><a href="feature-elements.html">Elements</a>
+                                </li>
+                                <li><a href="feature-grid.html">Grid</a>
+                                </li>
+                                <li><a href="feature-hovers.html">Hover effects</a>
+                                </li>
+                                <li><a href="feature-lightbox.html">Lightbox</a>
+                                </li>
+                                <li><a href="feature-media.html">Media</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="active"><a href="hotels.html">Hotels</a>
+                            <ul>
+                                <li class="active"><a href="hotel-details.html">Details</a>
+                                    <ul>
+                                        <li><a href="hotel-details.html">Layout 1</a>
+                                        </li>
+                                        <li><a href="hotel-details-2.html">Layout 2</a>
+                                        </li>
+                                        <li class="active"><a href="hotel-details-3.html">Layout 3</a>
+                                        </li>
+                                        <li><a href="hotel-details-4.html">Layout 4</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a href="hotel-payment.html">Payment</a>
+                                    <ul>
+                                        <li><a href="hotel-payment.html">Registered</a>
+                                        </li>
+                                        <li><a href="hotel-payment-registered-card.html">Existed Cards</a>
+                                        </li>
+                                        <li><a href="hotel-payment-unregistered.html">Unregistered</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a href="hotel-search.html">Search</a>
+                                    <ul>
+                                        <li><a href="hotel-search.html">Layout 1</a>
+                                        </li>
+                                        <li><a href="hotel-search-2.html">Layout 2</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a href="hotels.html">Results</a>
+                                    <ul>
+                                        <li><a href="hotels.html">Layout 1</a>
+                                        </li>
+                                        <li><a href="hotels-search-results-2.html">Layout 2</a>
+                                        </li>
+                                        <li><a href="hotels-search-results-3.html">Layout 3</a>
+                                        </li>
+                                        <li><a href="hotels-search-results-4.html">Layout 4</a>
+                                        </li>
+                                        <li><a href="hotel-search-results-5.html">Layout 5</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a href="flights.html">Flights</a>
+                            <ul>
+                                <li><a href="flight-payment.html">Payment</a>
+                                    <ul>
+                                        <li><a href="flight-payment.html">Registered</a>
+                                        </li>
+                                        <li><a href="flight-payment-registered-card.html">Existed Cards</a>
+                                        </li>
+                                        <li><a href="flight-payment-unregistered.html">Unregistered</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a href="flight-search.html">Search</a>
+                                    <ul>
+                                        <li><a href="flight-search.html">Layout 1</a>
+                                        </li>
+                                        <li><a href="flight-search-2.html">Layout 2</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a href="flights.html">List</a>
+                                    <ul>
+                                        <li><a href="flights.html">Layout 1</a>
+                                        </li>
+                                        <li><a href="flights-search-results-2.html">Layout 2</a>
+                                        </li>
+                                        <li><a href="flights-search-results-3.html">Layout 3</a>
+                                        </li>
+                                        <li><a href="flights-search-results-4.html">Layout 4</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a href="rentals.html">Rentals</a>
+                            <ul>
+                                <li><a href="rentals-details.html">Details</a>
+                                    <ul>
+                                        <li><a href="rentals-details.html">Layout 1</a>
+                                        </li>
+                                        <li><a href="rentals-details-2.html">Layout 2</a>
+                                        </li>
+                                        <li><a href="rentals-details-3.html">Layout 3</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a href="rental-payment.html">Payment</a>
+                                    <ul>
+                                        <li><a href="rental-payment.html">Registered</a>
+                                        </li>
+                                        <li><a href="rental-payment-registered-card.html">Existed Cards</a>
+                                        </li>
+                                        <li><a href="rental-payment-unregistered.html">Unregistered</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a href="rentals-search.html">Search</a>
+                                    <ul>
+                                        <li><a href="rentals-search.html">Layout 1</a>
+                                        </li>
+                                        <li><a href="rentals-search-2.html">Layout 2</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a href="rentals.html">Results</a>
+                                    <ul>
+                                        <li><a href="rentals.html">Layout 1</a>
+                                        </li>
+                                        <li><a href="rentals-search-results-2.html">Layout 2</a>
+                                        </li>
+                                        <li><a href="rentals-search-results-3.html">Layout 3</a>
+                                        </li>
+                                        <li><a href="rentals-search-results-4.html">Layout 4</a>
+                                        </li>
+                                        <li><a href="rentals-search-results-5.html">Layout 5</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a href="cars.html">Cars</a>
+                            <ul>
+                                <li><a href="car-details.html">Details</a>
+                                </li>
+                                <li><a href="car-payment.html">Payment</a>
+                                    <ul>
+                                        <li><a href="car-payment.html">Registered</a>
+                                        </li>
+                                        <li><a href="car-payment-registered-card.html">Existed Cards</a>
+                                        </li>
+                                        <li><a href="car-payment-unregistered.html">Unregistered</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a href="car-search.html">Search</a>
+                                    <ul>
+                                        <li><a href="car-search.html">Layout 1</a>
+                                        </li>
+                                        <li><a href="car-search-2.html">Layout 2</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a href="cars.html">Results</a>
+                                    <ul>
+                                        <li><a href="cars.html">Layout 1</a>
+                                        </li>
+                                        <li><a href="cars-results-2.html">Layout 2</a>
+                                        </li>
+                                        <li><a href="cars-results-3.html">Layout 3</a>
+                                        </li>
+                                        <li><a href="cars-results-4.html">Layout 4</a>
+                                        </li>
+                                        <li><a href="cars-results-5.html">Layout 5</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a href="activities.html">Activities</a>
+                            <ul>
+                                <li><a href="activitiy-details.html">Details</a>
+                                    <ul>
+                                        <li><a href="activitiy-details.html">Layout 1</a>
+                                        </li>
+                                        <li><a href="activitiy-details-2.html">Layout 2</a>
+                                        </li>
+                                        <li><a href="activitiy-details-3.html">Layout 3</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a href="activity-search.html">Search</a>
+                                    <ul>
+                                        <li><a href="activity-search.html">Layout 1</a>
+                                        </li>
+                                        <li><a href="activity-search-2.html">Layout 2</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a href="activitiy-payment.html">Payment</a>
+                                    <ul>
+                                        <li><a href="activitiy-payment.html">Registered</a>
+                                        </li>
+                                        <li><a href="activity-payment-registered-card.html">Existed Cards</a>
+                                        </li>
+                                        <li><a href="activitiy-payment-unregistered.html">Unregistered</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a href="activities.html">Results</a>
+                                    <ul>
+                                        <li><a href="activities.html">Layout 1</a>
+                                        </li>
+                                        <li><a href="activities-search-results-2.html">Layout 2</a>
+                                        </li>
+                                        <li><a href="activities-search-results-3.html">Layout 3</a>
+                                        </li>
+                                        <li><a href="activities-search-results-4.html">Layout 4</a>
+                                        </li>
+                                        <li><a href="activities-search-results-5.html">Layout 5</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+
+
+
+
+
         <div class="container">
             <ul class="breadcrumb">
                 <li><a href="index.html">Home</a>
@@ -956,774 +1400,7 @@
                                     </div>
                                 </div>
                             </li>
-                            <li>
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <div class="booking-item-review-person">
-                                            <a class="booking-item-review-person-avatar round" href="#">
-                                                <img src="img/70x70.png" alt="Image Alternative text" title="Afro" />
-                                            </a>
-                                            <p class="booking-item-review-person-name"><a href="#">Minnie Aviles</a>
-                                            </p>
-                                            <p class="booking-item-review-person-loc">Palm Beach, FL</p><small><a href="#">104 Reviews</a></small>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-10">
-                                        <div class="booking-item-review-content">
-                                            <h5>"Torquent curae orci"</h5>
-                                            <ul class="icon-group booking-item-rating-stars">
-                                                <li><i class="fa fa-star"></i>
-                                                </li>
-                                                <li><i class="fa fa-star"></i>
-                                                </li>
-                                                <li><i class="fa fa-star"></i>
-                                                </li>
-                                                <li><i class="fa fa-star"></i>
-                                                </li>
-                                                <li><i class="fa fa-star"></i>
-                                                </li>
-                                            </ul>
-                                            <p>Tortor dictumst ante luctus sagittis sodales quam per sapien dui proin fames consequat convallis vestibulum vitae magnis vel ullamcorper risus convallis<span class="booking-item-review-more"> Massa montes facilisis quis curabitur fringilla ornare nec praesent elit integer felis nam purus penatibus dis mauris sed aenean ut ut tortor neque purus parturient volutpat ultricies habitasse ad montes cum vivamus tellus mollis sodales fringilla nam laoreet congue odio ultricies dolor</span>
-                                            </p>
-                                            <div class="booking-item-review-more-content">
-                                                <p>Mollis non felis felis egestas lorem nascetur proin quis vehicula aenean ut eleifend elit montes tincidunt elit blandit ligula ante torquent porta non integer quisque rutrum gravida interdum vehicula natoque massa aliquet ante rutrum lectus quis curabitur nunc vulputate mollis suspendisse</p>
-                                                <p>Sociosqu malesuada sollicitudin erat nulla semper pellentesque vehicula porta et laoreet accumsan euismod praesent cubilia aptent congue malesuada eros cursus imperdiet litora purus ut sit vehicula augue litora penatibus sapien duis fusce nisl habitant odio pellentesque</p>
-                                                <p class="text-small mt20">Stayed March 2014, traveled as a couple</p>
-                                                <div class="row">
-                                                    <div class="col-md-4">
-                                                        <ul class="list booking-item-raiting-summary-list">
-                                                            <li>
-                                                                <div class="booking-item-raiting-list-title">Sleep</div>
-                                                                <ul class="icon-group booking-item-rating-stars">
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o text-gray"></i>
-                                                                    </li>
-                                                                </ul>
-                                                            </li>
-                                                            <li>
-                                                                <div class="booking-item-raiting-list-title">Location</div>
-                                                                <ul class="icon-group booking-item-rating-stars">
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                </ul>
-                                                            </li>
-                                                            <li>
-                                                                <div class="booking-item-raiting-list-title">Service</div>
-                                                                <ul class="icon-group booking-item-rating-stars">
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                </ul>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <ul class="list booking-item-raiting-summary-list">
-                                                            <li>
-                                                                <div class="booking-item-raiting-list-title">Clearness</div>
-                                                                <ul class="icon-group booking-item-rating-stars">
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                </ul>
-                                                            </li>
-                                                            <li>
-                                                                <div class="booking-item-raiting-list-title">Rooms</div>
-                                                                <ul class="icon-group booking-item-rating-stars">
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                </ul>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="booking-item-review-expand"><span class="booking-item-review-expand-more">More <i class="fa fa-angle-down"></i></span><span class="booking-item-review-expand-less">Less <i class="fa fa-angle-up"></i></span>
-                                            </div>
-                                            <p class="booking-item-review-rate">Was this review helpful?
-                                                <a class="fa fa-thumbs-o-up box-icon-inline round" href="#"></a><b class="text-color"> 9</b>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <div class="booking-item-review-person">
-                                            <a class="booking-item-review-person-avatar round" href="#">
-                                                <img src="img/70x70.png" alt="Image Alternative text" title="Chiara" />
-                                            </a>
-                                            <p class="booking-item-review-person-name"><a href="#">Cyndy Naquin</a>
-                                            </p>
-                                            <p class="booking-item-review-person-loc">Palm Beach, FL</p><small><a href="#">10 Reviews</a></small>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-10">
-                                        <div class="booking-item-review-content">
-                                            <h5>"Tellus ligula fames"</h5>
-                                            <ul class="icon-group booking-item-rating-stars">
-                                                <li><i class="fa fa-star"></i>
-                                                </li>
-                                                <li><i class="fa fa-star"></i>
-                                                </li>
-                                                <li><i class="fa fa-star"></i>
-                                                </li>
-                                                <li><i class="fa fa-star"></i>
-                                                </li>
-                                                <li><i class="fa fa-star"></i>
-                                                </li>
-                                            </ul>
-                                            <p>Ad dictum litora platea massa quis donec quisque praesent faucibus aliquet viverra quam auctor sapien fringilla dis quam senectus et cubilia nascetur vestibulum ridiculus dis elementum natoque facilisis laoreet<span class="booking-item-review-more"> Volutpat lorem sit lobortis mollis aenean senectus iaculis commodo auctor enim quisque in vehicula netus potenti nunc malesuada sapien sociis montes augue gravida dolor habitant mauris dolor lacinia quis dapibus sociosqu netus volutpat tellus egestas euismod</span>
-                                            </p>
-                                            <div class="booking-item-review-more-content">
-                                                <p>Ridiculus vestibulum sit nulla felis fames nulla dictum gravida eget arcu aptent auctor neque conubia sodales duis porttitor eu odio a lectus massa aenean cum cras enim consectetur taciti odio malesuada magna tempus eu potenti elementum interdum ultrices suspendisse vestibulum dapibus torquent ipsum</p>
-                                                <p>Rhoncus id aliquet fusce eget quisque posuere condimentum lectus molestie pulvinar placerat ac interdum maecenas mollis ad nostra rutrum ornare arcu taciti vitae lobortis eleifend iaculis turpis vitae cras tellus ultricies odio suspendisse nascetur tellus lacinia volutpat dictumst blandit scelerisque nullam ut ipsum proin hac morbi donec porttitor facilisi elementum facilisis per accumsan pretium aliquet commodo non duis est vestibulum phasellus leo fringilla</p>
-                                                <p class="text-small mt20">Stayed March 2014, traveled as a couple</p>
-                                                <div class="row">
-                                                    <div class="col-md-4">
-                                                        <ul class="list booking-item-raiting-summary-list">
-                                                            <li>
-                                                                <div class="booking-item-raiting-list-title">Sleep</div>
-                                                                <ul class="icon-group booking-item-rating-stars">
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                </ul>
-                                                            </li>
-                                                            <li>
-                                                                <div class="booking-item-raiting-list-title">Location</div>
-                                                                <ul class="icon-group booking-item-rating-stars">
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                </ul>
-                                                            </li>
-                                                            <li>
-                                                                <div class="booking-item-raiting-list-title">Service</div>
-                                                                <ul class="icon-group booking-item-rating-stars">
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                </ul>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <ul class="list booking-item-raiting-summary-list">
-                                                            <li>
-                                                                <div class="booking-item-raiting-list-title">Clearness</div>
-                                                                <ul class="icon-group booking-item-rating-stars">
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                </ul>
-                                                            </li>
-                                                            <li>
-                                                                <div class="booking-item-raiting-list-title">Rooms</div>
-                                                                <ul class="icon-group booking-item-rating-stars">
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                </ul>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="booking-item-review-expand"><span class="booking-item-review-expand-more">More <i class="fa fa-angle-down"></i></span><span class="booking-item-review-expand-less">Less <i class="fa fa-angle-up"></i></span>
-                                            </div>
-                                            <p class="booking-item-review-rate">Was this review helpful?
-                                                <a class="fa fa-thumbs-o-up box-icon-inline round" href="#"></a><b class="text-color"> 17</b>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <div class="booking-item-review-person">
-                                            <a class="booking-item-review-person-avatar round" href="#">
-                                                <img src="img/70x70.png" alt="Image Alternative text" title="AMaze" />
-                                            </a>
-                                            <p class="booking-item-review-person-name"><a href="#">Carol Blevins</a>
-                                            </p>
-                                            <p class="booking-item-review-person-loc">Palm Beach, FL</p><small><a href="#">74 Reviews</a></small>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-10">
-                                        <div class="booking-item-review-content">
-                                            <h5>"Pulvinar fermentum nunc augue id conubia"</h5>
-                                            <ul class="icon-group booking-item-rating-stars">
-                                                <li><i class="fa fa-star"></i>
-                                                </li>
-                                                <li><i class="fa fa-star"></i>
-                                                </li>
-                                                <li><i class="fa fa-star"></i>
-                                                </li>
-                                                <li><i class="fa fa-star"></i>
-                                                </li>
-                                                <li><i class="fa fa-star"></i>
-                                                </li>
-                                            </ul>
-                                            <p>Luctus sociosqu himenaeos dictum duis lobortis penatibus class nascetur fames pulvinar varius pulvinar dignissim nascetur fringilla ligula luctus nisl habitasse ut ac sociis nisi tristique consectetur potenti curae nascetur pellentesque duis odio ornare vestibulum sem consectetur iaculis torquent lobortis dis<span class="booking-item-review-more"> Libero risus parturient vestibulum congue litora fusce aenean at facilisi volutpat lorem mi consequat natoque tincidunt eget etiam nascetur iaculis iaculis non ultricies metus porta lobortis convallis lacinia integer platea cum pharetra duis nulla lectus himenaeos hac condimentum viverra condimentum morbi maecenas elit vestibulum vulputate nisl dignissim mus lacus sem euismod venenatis at varius mattis rutrum nostra habitant feugiat condimentum faucibus taciti porttitor mi suspendisse</span>
-                                            </p>
-                                            <div class="booking-item-review-more-content">
-                                                <p>Sodales condimentum cum maecenas conubia massa morbi tristique ante iaculis sociosqu fusce lobortis phasellus nisi massa praesent torquent ultricies nullam ornare vitae justo ipsum nisi inceptos cursus blandit ipsum convallis quisque iaculis lectus orci facilisis maecenas mauris tristique iaculis cras volutpat id bibendum mus posuere ante ad</p>
-                                                <p>Ligula ac hendrerit est arcu primis fames lacus bibendum eget fusce nibh purus fusce laoreet hendrerit quisque ipsum aptent sit hac euismod dictum natoque elit fames est porttitor parturient felis euismod sed euismod penatibus praesent vivamus himenaeos dictumst mauris sem nunc eget curae integer et orci nostra gravida aenean quis gravida primis congue lacus feugiat cum eget vulputate adipiscing porta nulla fames integer vitae volutpat porta varius at nam</p>
-                                                <p class="text-small mt20">Stayed March 2014, traveled as a couple</p>
-                                                <div class="row">
-                                                    <div class="col-md-4">
-                                                        <ul class="list booking-item-raiting-summary-list">
-                                                            <li>
-                                                                <div class="booking-item-raiting-list-title">Sleep</div>
-                                                                <ul class="icon-group booking-item-rating-stars">
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                </ul>
-                                                            </li>
-                                                            <li>
-                                                                <div class="booking-item-raiting-list-title">Location</div>
-                                                                <ul class="icon-group booking-item-rating-stars">
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                </ul>
-                                                            </li>
-                                                            <li>
-                                                                <div class="booking-item-raiting-list-title">Service</div>
-                                                                <ul class="icon-group booking-item-rating-stars">
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o text-gray"></i>
-                                                                    </li>
-                                                                </ul>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <ul class="list booking-item-raiting-summary-list">
-                                                            <li>
-                                                                <div class="booking-item-raiting-list-title">Clearness</div>
-                                                                <ul class="icon-group booking-item-rating-stars">
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                </ul>
-                                                            </li>
-                                                            <li>
-                                                                <div class="booking-item-raiting-list-title">Rooms</div>
-                                                                <ul class="icon-group booking-item-rating-stars">
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                </ul>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="booking-item-review-expand"><span class="booking-item-review-expand-more">More <i class="fa fa-angle-down"></i></span><span class="booking-item-review-expand-less">Less <i class="fa fa-angle-up"></i></span>
-                                            </div>
-                                            <p class="booking-item-review-rate">Was this review helpful?
-                                                <a class="fa fa-thumbs-o-up box-icon-inline round" href="#"></a><b class="text-color"> 9</b>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <div class="booking-item-review-person">
-                                            <a class="booking-item-review-person-avatar round" href="#">
-                                                <img src="img/70x70.png" alt="Image Alternative text" title="Gamer Chick" />
-                                            </a>
-                                            <p class="booking-item-review-person-name"><a href="#">Cheryl Gustin</a>
-                                            </p>
-                                            <p class="booking-item-review-person-loc">Palm Beach, FL</p><small><a href="#">122 Reviews</a></small>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-10">
-                                        <div class="booking-item-review-content">
-                                            <h5>"Ad nisl natoque ante"</h5>
-                                            <ul class="icon-group booking-item-rating-stars">
-                                                <li><i class="fa fa-star"></i>
-                                                </li>
-                                                <li><i class="fa fa-star"></i>
-                                                </li>
-                                                <li><i class="fa fa-star"></i>
-                                                </li>
-                                                <li><i class="fa fa-star"></i>
-                                                </li>
-                                                <li><i class="fa fa-star"></i>
-                                                </li>
-                                            </ul>
-                                            <p>Non suscipit netus phasellus felis penatibus porta dapibus luctus massa a primis vehicula habitant class blandit arcu parturient at litora per inceptos mauris nascetur congue amet molestie<span class="booking-item-review-more"> Nulla egestas nam posuere habitant hac lacinia cubilia venenatis hendrerit nibh lacinia dictum nec montes parturient eget sodales elit justo senectus massa curae sem dictum integer eros lacus ad torquent ad himenaeos mus sed inceptos duis mauris magna taciti augue consectetur sagittis inceptos molestie auctor ante ligula phasellus nisl congue ad consectetur lacus fermentum</span>
-                                            </p>
-                                            <div class="booking-item-review-more-content">
-                                                <p>Montes ut ridiculus mauris ac pretium gravida ante tellus neque himenaeos quisque congue condimentum nam volutpat dictumst id cum netus augue accumsan sociosqu tortor elit bibendum suscipit quis penatibus dignissim ullamcorper mattis scelerisque lacus elementum ac nulla in montes neque nibh diam aptent</p>
-                                                <p>Class platea hendrerit maecenas tellus id at ante quisque nunc taciti lorem consectetur turpis suspendisse vivamus ridiculus dictumst odio et augue urna facilisis neque taciti congue laoreet nullam magnis dis cras nostra scelerisque curabitur a etiam conubia libero conubia sociis felis arcu class volutpat potenti leo accumsan vitae cursus neque litora massa ad varius montes scelerisque condimentum luctus sollicitudin nec risus per lorem</p>
-                                                <p class="text-small mt20">Stayed March 2014, traveled as a couple</p>
-                                                <div class="row">
-                                                    <div class="col-md-4">
-                                                        <ul class="list booking-item-raiting-summary-list">
-                                                            <li>
-                                                                <div class="booking-item-raiting-list-title">Sleep</div>
-                                                                <ul class="icon-group booking-item-rating-stars">
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                </ul>
-                                                            </li>
-                                                            <li>
-                                                                <div class="booking-item-raiting-list-title">Location</div>
-                                                                <ul class="icon-group booking-item-rating-stars">
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                </ul>
-                                                            </li>
-                                                            <li>
-                                                                <div class="booking-item-raiting-list-title">Service</div>
-                                                                <ul class="icon-group booking-item-rating-stars">
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                </ul>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <ul class="list booking-item-raiting-summary-list">
-                                                            <li>
-                                                                <div class="booking-item-raiting-list-title">Clearness</div>
-                                                                <ul class="icon-group booking-item-rating-stars">
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                </ul>
-                                                            </li>
-                                                            <li>
-                                                                <div class="booking-item-raiting-list-title">Rooms</div>
-                                                                <ul class="icon-group booking-item-rating-stars">
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                </ul>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="booking-item-review-expand"><span class="booking-item-review-expand-more">More <i class="fa fa-angle-down"></i></span><span class="booking-item-review-expand-less">Less <i class="fa fa-angle-up"></i></span>
-                                            </div>
-                                            <p class="booking-item-review-rate">Was this review helpful?
-                                                <a class="fa fa-thumbs-o-up box-icon-inline round" href="#"></a><b class="text-color"> 20</b>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <div class="booking-item-review-person">
-                                            <a class="booking-item-review-person-avatar round" href="#">
-                                                <img src="img/70x70.png" alt="Image Alternative text" title="Bubbles" />
-                                            </a>
-                                            <p class="booking-item-review-person-name"><a href="#">Joe Smith</a>
-                                            </p>
-                                            <p class="booking-item-review-person-loc">Palm Beach, FL</p><small><a href="#">117 Reviews</a></small>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-10">
-                                        <div class="booking-item-review-content">
-                                            <h5>"Aptent tempus maecenas"</h5>
-                                            <ul class="icon-group booking-item-rating-stars">
-                                                <li><i class="fa fa-star"></i>
-                                                </li>
-                                                <li><i class="fa fa-star"></i>
-                                                </li>
-                                                <li><i class="fa fa-star"></i>
-                                                </li>
-                                                <li><i class="fa fa-star"></i>
-                                                </li>
-                                                <li><i class="fa fa-star"></i>
-                                                </li>
-                                            </ul>
-                                            <p>Accumsan vel quam inceptos mus maecenas elementum hendrerit porttitor id placerat suspendisse molestie sollicitudin ut suspendisse pellentesque nostra fringilla senectus cursus<span class="booking-item-review-more"> Torquent praesent praesent orci integer laoreet adipiscing dignissim hendrerit fringilla porta inceptos magnis quis dui hendrerit ad mollis montes phasellus ornare aliquam cum laoreet nisi augue ac eleifend nisi adipiscing nec curae suspendisse porttitor sociis sem condimentum lorem elit etiam morbi cursus rutrum curae ultrices convallis turpis montes lacinia dui nisi aliquam rutrum quis faucibus potenti egestas nisi aenean dictum ligula</span>
-                                            </p>
-                                            <div class="booking-item-review-more-content">
-                                                <p>Blandit donec mi porttitor at sit habitasse phasellus tempus habitant pulvinar nostra himenaeos pulvinar facilisi dui tincidunt luctus condimentum porttitor eros</p>
-                                                <p>Metus quisque scelerisque sollicitudin habitant hendrerit pretium magna ultricies massa dignissim mi praesent et justo sed platea est cras penatibus fermentum neque morbi vel nec sed imperdiet accumsan ultricies aliquet suspendisse placerat feugiat tellus platea fermentum eros in commodo quisque porta dolor scelerisque gravida commodo</p>
-                                                <p class="text-small mt20">Stayed March 2014, traveled as a couple</p>
-                                                <div class="row">
-                                                    <div class="col-md-4">
-                                                        <ul class="list booking-item-raiting-summary-list">
-                                                            <li>
-                                                                <div class="booking-item-raiting-list-title">Sleep</div>
-                                                                <ul class="icon-group booking-item-rating-stars">
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o text-gray"></i>
-                                                                    </li>
-                                                                </ul>
-                                                            </li>
-                                                            <li>
-                                                                <div class="booking-item-raiting-list-title">Location</div>
-                                                                <ul class="icon-group booking-item-rating-stars">
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                </ul>
-                                                            </li>
-                                                            <li>
-                                                                <div class="booking-item-raiting-list-title">Service</div>
-                                                                <ul class="icon-group booking-item-rating-stars">
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                </ul>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <ul class="list booking-item-raiting-summary-list">
-                                                            <li>
-                                                                <div class="booking-item-raiting-list-title">Clearness</div>
-                                                                <ul class="icon-group booking-item-rating-stars">
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                </ul>
-                                                            </li>
-                                                            <li>
-                                                                <div class="booking-item-raiting-list-title">Rooms</div>
-                                                                <ul class="icon-group booking-item-rating-stars">
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o text-gray"></i>
-                                                                    </li>
-                                                                </ul>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="booking-item-review-expand"><span class="booking-item-review-expand-more">More <i class="fa fa-angle-down"></i></span><span class="booking-item-review-expand-less">Less <i class="fa fa-angle-up"></i></span>
-                                            </div>
-                                            <p class="booking-item-review-rate">Was this review helpful?
-                                                <a class="fa fa-thumbs-o-up box-icon-inline round" href="#"></a><b class="text-color"> 15</b>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <div class="booking-item-review-person">
-                                            <a class="booking-item-review-person-avatar round" href="#">
-                                                <img src="img/70x70.png" alt="Image Alternative text" title="Me with the Uke" />
-                                            </a>
-                                            <p class="booking-item-review-person-name"><a href="#">Ava McDonald</a>
-                                            </p>
-                                            <p class="booking-item-review-person-loc">Palm Beach, FL</p><small><a href="#">141 Reviews</a></small>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-10">
-                                        <div class="booking-item-review-content">
-                                            <h5>"In accumsan ullamcorper laoreet"</h5>
-                                            <ul class="icon-group booking-item-rating-stars">
-                                                <li><i class="fa fa-star"></i>
-                                                </li>
-                                                <li><i class="fa fa-star"></i>
-                                                </li>
-                                                <li><i class="fa fa-star"></i>
-                                                </li>
-                                                <li><i class="fa fa-star"></i>
-                                                </li>
-                                                <li><i class="fa fa-star"></i>
-                                                </li>
-                                            </ul>
-                                            <p>Nam litora senectus diam sapien hac turpis euismod platea lacus mauris elementum gravida tincidunt magna ac habitant libero dapibus ante sapien gravida integer gravida etiam eu molestie habitasse tincidunt luctus integer ante eget penatibus hac tortor imperdiet<span class="booking-item-review-more"> Ante elementum tellus vel habitant in laoreet aenean sapien penatibus nam dolor class in potenti natoque lobortis justo taciti pretium orci commodo maecenas quisque sit est mollis est pulvinar est malesuada habitant non vehicula fringilla netus cum ornare massa blandit natoque dui volutpat lacus non volutpat enim praesent lobortis semper est morbi tempor</span>
-                                            </p>
-                                            <div class="booking-item-review-more-content">
-                                                <p>Aliquet magnis ac amet malesuada turpis placerat platea morbi vitae placerat amet aenean per nisi semper et libero mauris eget</p>
-                                                <p>Cras facilisi aliquam vulputate velit penatibus elit gravida neque mollis purus vivamus habitasse iaculis nullam cras consectetur cum luctus metus dui feugiat integer hac maecenas tempor viverra hendrerit etiam est feugiat quisque laoreet lorem ad eros fames vel cum class primis placerat felis venenatis amet convallis nulla condimentum condimentum est ornare</p>
-                                                <p class="text-small mt20">Stayed March 2014, traveled as a couple</p>
-                                                <div class="row">
-                                                    <div class="col-md-4">
-                                                        <ul class="list booking-item-raiting-summary-list">
-                                                            <li>
-                                                                <div class="booking-item-raiting-list-title">Sleep</div>
-                                                                <ul class="icon-group booking-item-rating-stars">
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                </ul>
-                                                            </li>
-                                                            <li>
-                                                                <div class="booking-item-raiting-list-title">Location</div>
-                                                                <ul class="icon-group booking-item-rating-stars">
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                </ul>
-                                                            </li>
-                                                            <li>
-                                                                <div class="booking-item-raiting-list-title">Service</div>
-                                                                <ul class="icon-group booking-item-rating-stars">
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                </ul>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <ul class="list booking-item-raiting-summary-list">
-                                                            <li>
-                                                                <div class="booking-item-raiting-list-title">Clearness</div>
-                                                                <ul class="icon-group booking-item-rating-stars">
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                </ul>
-                                                            </li>
-                                                            <li>
-                                                                <div class="booking-item-raiting-list-title">Rooms</div>
-                                                                <ul class="icon-group booking-item-rating-stars">
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o text-gray"></i>
-                                                                    </li>
-                                                                </ul>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="booking-item-review-expand"><span class="booking-item-review-expand-more">More <i class="fa fa-angle-down"></i></span><span class="booking-item-review-expand-less">Less <i class="fa fa-angle-up"></i></span>
-                                            </div>
-                                            <p class="booking-item-review-rate">Was this review helpful?
-                                                <a class="fa fa-thumbs-o-up box-icon-inline round" href="#"></a><b class="text-color"> 16</b>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
+                           
                         </ul>
                         <div class="row wrap">
                             <div class="col-md-5">
@@ -1857,8 +1534,77 @@
             </div>
             <div class="gap gap-small"></div>
         </div>
-        <jsp:include page="footer.jsp"></jsp:include>
-        
+
+
+
+        <footer id="main-footer">
+            <div class="container">
+                <div class="row row-wrap">
+                    <div class="col-md-3">
+                        <a class="logo" href="index.html">
+                            <img src="img/logo-invert.png" alt="Image Alternative text" title="Image Title" />
+                        </a>
+                        <p class="mb20">Booking, reviews and advices on hotels, resorts, flights, vacation rentals, travel packages, and lots more!</p>
+                        <ul class="list list-horizontal list-space">
+                            <li>
+                                <a class="fa fa-facebook box-icon-normal round animate-icon-bottom-to-top" href="#"></a>
+                            </li>
+                            <li>
+                                <a class="fa fa-twitter box-icon-normal round animate-icon-bottom-to-top" href="#"></a>
+                            </li>
+                            <li>
+                                <a class="fa fa-google-plus box-icon-normal round animate-icon-bottom-to-top" href="#"></a>
+                            </li>
+                            <li>
+                                <a class="fa fa-linkedin box-icon-normal round animate-icon-bottom-to-top" href="#"></a>
+                            </li>
+                            <li>
+                                <a class="fa fa-pinterest box-icon-normal round animate-icon-bottom-to-top" href="#"></a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-md-3">
+                        <h4>Newsletter</h4>
+                        <form>
+                            <label>Enter your E-mail Address</label>
+                            <input type="text" class="form-control">
+                            <p class="mt5"><small>*We Never Send Spam</small>
+                            </p>
+                            <input type="submit" class="btn btn-primary" value="Subscribe">
+                        </form>
+                    </div>
+                    <div class="col-md-2">
+                        <ul class="list list-footer">
+                            <li><a href="#">About US</a>
+                            </li>
+                            <li><a href="#">Press Centre</a>
+                            </li>
+                            <li><a href="#">Best Price Guarantee</a>
+                            </li>
+                            <li><a href="#">Travel News</a>
+                            </li>
+                            <li><a href="#">Jobs</a>
+                            </li>
+                            <li><a href="#">Privacy Policy</a>
+                            </li>
+                            <li><a href="#">Terms of Use</a>
+                            </li>
+                            <li><a href="#">Feedback</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h4>Have Questions?</h4>
+                        <h4 class="text-color">+1-202-555-0173</h4>
+                        <h4><a href="#" class="text-color">support@traveler.com</a></h4>
+                        <p>24/7 Dedicated Customer Support</p>
+                    </div>
+
+                </div>
+            </div>
+        </footer>
+
         <script src="js/jquery.js"></script>
         <script src="js/bootstrap.js"></script>
         <script src="js/slimmenu.js"></script>
@@ -1879,5 +1625,15 @@
         <script src="js/countdown.js"></script>
         <script src="js/gridrotator.js"></script>
         <script src="js/custom.js"></script>
-    </body>
+    </div>
+</body>
+<script>
+	function myFunction(){
+		var review = document.getElementById("review");
+		review.value = "Y";
+		location.reload();
+	}
+	
+	
+</script>
 </html>

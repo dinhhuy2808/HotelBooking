@@ -21,12 +21,13 @@ CREATE TABLE ROOMSTATUS
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
-
 CREATE TABLE ROOM
 (
 	ROOMID INT  NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	ROOMTYPEID INT,
 	ROOMSTATUSID INT,
+    COST INT,
+    HOTELID INT,
 	CONSTRAINT ROOMTYPEID FOREIGN KEY (ROOMTYPEID) REFERENCES ROOMTYPE(ROOMTYPEID),
 	CONSTRAINT ROOMSTATUSID FOREIGN KEY (ROOMSTATUSID) REFERENCES ROOMSTATUS(ROOMSTATUSID)    
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -34,20 +35,20 @@ CREATE TABLE ROOM
 CREATE TABLE HOTEL
 (
 	HOTELID INT  NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-	HOTELNAME VARCHAR(20) NOT NULL,
-	HOTELCOUNTRY VARCHAR(20) NOT NULL,
-	HOTELSTATE VARCHAR(20) NOT NULL,
-	HOTELCITY VARCHAR(20) NOT NULL,
-	HOTELPHONE NUMERIC(11,0) NOT NULL,
-	ROOMID INT,
-	CONSTRAINT ROOMID FOREIGN KEY (ROOMID) REFERENCES ROOM(ROOMID)
+	HOTELNAME VARCHAR(20)  NULL,
+	HOTELCOUNTRY VARCHAR(20)  NULL,
+	HOTELSTATE VARCHAR(20)  NULL,
+	HOTELCITY VARCHAR(20)  NULL,
+	HOTELPHONE NUMERIC(11,0)  NULL,
+    DESCRIPTION VARCHAR(65535) NULL,
+    IMAGE VARCHAR(256)  NULL
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE RESDETAIL
 (
 	RESDETAILID INT  NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	STARTDATE DATETIME,
-	ENDDATE DATETIME,
+	STARTDATE INT,
+	ENDDATE INT,
 	NUMBEROFROOM INT,
 	NUMBEROFGUEST INT,
 	NUMBEROFNIGHT INT
@@ -63,14 +64,13 @@ CREATE TABLE RESERVATION
 (
 	RESERVATIONID INT  NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	GUESTID INT,
-	HOTELID INT,
-	RESDETAILID INT,
+	HOTELNAME VARCHAR(20),
 	BILLID INT,
-	CONSTRAINT GUESTID FOREIGN KEY (GUESTID) REFERENCES GUEST(GUESTID),
-	CONSTRAINT HOTELID FOREIGN KEY (HOTELID) REFERENCES HOTEL(HOTELID),
-	CONSTRAINT RESDETAILID FOREIGN KEY (RESDETAILID) REFERENCES RESDETAIL(RESDETAILID),
-	CONSTRAINT BILLID FOREIGN KEY (BILLID) REFERENCES BILL(BILLID)
+    ROOMID INT,
+    ENDDATE INT,
+    STARTDATE INT
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 
 CREATE TABLE GUESTREVIEW 
 (
@@ -94,44 +94,58 @@ insert into ROOMSTATUS (`ROOMSTATUS`) values ("YES");
 insert into ROOMSTATUS (`ROOMSTATUS`) values ("NO");
 
 
+insert into room (`ROOMTYPEID`,`ROOMSTATUSID`,`COST`,`HOTELID`) values (1,1,150,13);
+insert into room (`ROOMTYPEID`,`ROOMSTATUSID`,`COST`,`HOTELID`) values (2,1,350,14);
+insert into room (`ROOMTYPEID`,`ROOMSTATUSID`,`COST`,`HOTELID`) values (3,2,450,13);
+insert into room (`ROOMTYPEID`,`ROOMSTATUSID`,`COST`,`HOTELID`) values (1,1,200,13);
+insert into room (`ROOMTYPEID`,`ROOMSTATUSID`,`COST`,`HOTELID`) values (2,2,350,13);
+insert into room (`ROOMTYPEID`,`ROOMSTATUSID`,`COST`,`HOTELID`) values (3,1,455,15);
+insert into room (`ROOMTYPEID`,`ROOMSTATUSID`,`COST`,`HOTELID`) values (3,1,455,13);
+insert into room (`ROOMTYPEID`,`ROOMSTATUSID`,`COST`,`HOTELID`) values (2,1,400,13);
+insert into room (`ROOMTYPEID`,`ROOMSTATUSID`,`COST`,`HOTELID`) values (3,2,350,16);
+insert into room (`ROOMTYPEID`,`ROOMSTATUSID`,`COST`,`HOTELID`) values (1,1,175,13);
 
-insert into room (`ROOMTYPEID`,`ROOMSTATUSID`) values (1,1);
-insert into room (`ROOMTYPEID`,`ROOMSTATUSID`) values (2,1);
-insert into room (`ROOMTYPEID`,`ROOMSTATUSID`) values (3,2);
-insert into room (`ROOMTYPEID`,`ROOMSTATUSID`) values (1,1);
-insert into room (`ROOMTYPEID`,`ROOMSTATUSID`) values (2,2);
-insert into room (`ROOMTYPEID`,`ROOMSTATUSID`) values (3,1);
-insert into room (`ROOMTYPEID`,`ROOMSTATUSID`) values (3,1);
-insert into room (`ROOMTYPEID`,`ROOMSTATUSID`) values (2,1);
-insert into room (`ROOMTYPEID`,`ROOMSTATUSID`) values (3,2);
-insert into room (`ROOMTYPEID`,`ROOMSTATUSID`) values (1,1);
 
-insert into hotel(`HOTELNAME`,`HOTELCOUNTRY`,`HOTELSTATE`,`HOTELCITY`,`HOTELPHONE`,`ROOMID`)
-values ("hotel1","hotelcontry1","hotelstate1","city1","13245",1);
+insert into hotel(`HOTELNAME`,`HOTELCOUNTRY`,`HOTELSTATE`,`HOTELCITY`,`HOTELPHONE`)
+values ("hotel1","hotelcontry1","hotelstate1","city1","13245");
 
-insert into hotel(`HOTELNAME`,`HOTELCOUNTRY`,`HOTELSTATE`,`HOTELCITY`,`HOTELPHONE`,`ROOMID`)
-values ("hotel2","hotelcontry2","hotelstate2","city2","132452",2);
+insert into hotel(`HOTELNAME`,`HOTELCOUNTRY`,`HOTELSTATE`,`HOTELCITY`,`HOTELPHONE`)
+values ("hotel2","hotelcontry2","hotelstate2","city2","132452");
 
-insert into hotel(`HOTELNAME`,`HOTELCOUNTRY`,`HOTELSTATE`,`HOTELCITY`,`HOTELPHONE`,`ROOMID`)
-values ("hotel1","hotelcontry1","hotelstate1","city1","13245",3);
+insert into hotel(`HOTELNAME`,`HOTELCOUNTRY`,`HOTELSTATE`,`HOTELCITY`,`HOTELPHONE`)
+values ("hotel3","hotelcontry3","hotelstate3","city3","132453");
 
-insert into hotel(`HOTELNAME`,`HOTELCOUNTRY`,`HOTELSTATE`,`HOTELCITY`,`HOTELPHONE`,`ROOMID`)
-values ("hotel1","hotelcontry1","hotelstate1","city1","13245",4);
+insert into hotel(`HOTELNAME`,`HOTELCOUNTRY`,`HOTELSTATE`,`HOTELCITY`,`HOTELPHONE`)
+values ("hotel14","hotelcontry14","hotelstate14","city14","132454");
 
-insert into hotel(`HOTELNAME`,`HOTELCOUNTRY`,`HOTELSTATE`,`HOTELCITY`,`HOTELPHONE`,`ROOMID`)
-values ("hotel1","hotelcontry1","hotelstate1","city1","13245",5);
 
-insert into hotel(`HOTELNAME`,`HOTELCOUNTRY`,`HOTELSTATE`,`HOTELCITY`,`HOTELPHONE`,`ROOMID`)
-values ("hotel3","hotelcontry3","hotelstate3","city3","132453",6);
+select * from room ;
 
-insert into hotel(`HOTELNAME`,`HOTELCOUNTRY`,`HOTELSTATE`,`HOTELCITY`,`HOTELPHONE`,`ROOMID`)
-values ("hotel1","hotelcontry1","hotelstate1","city1","13245",7);
+select * from hotel order by hotelname;
 
-insert into hotel(`HOTELNAME`,`HOTELCOUNTRY`,`HOTELSTATE`,`HOTELCITY`,`HOTELPHONE`,`ROOMID`)
-values ("hotel1","hotelcontry1","hotelstate1","city1","13245",8);
-insert into hotel(`HOTELNAME`,`HOTELCOUNTRY`,`HOTELSTATE`,`HOTELCITY`,`HOTELPHONE`,`ROOMID`)
-values ("hotel14","hotelcontry14","hotelstate14","city14","132454",9);
-insert into hotel(`HOTELNAME`,`HOTELCOUNTRY`,`HOTELSTATE`,`HOTELCITY`,`HOTELPHONE`,`ROOMID`)
-values ("hotel1","hotelcontry1","hotelstate1","city1","13245",10);
+alter table hotel add IMAGE varchar(256) null
+update hotel set image = "img/800x600.png" where hotelid = 13;
+update hotel set image = "img/400x300.png" where hotelid = 14;
+update hotel set image = "img/300x300.png" where hotelid = 15;
+update hotel set image = "img/1200x500.png" where hotelid = 16;
 
-select * from hotel
+select * from roomstatus ;-- 1 = available ,2 = booked
+
+select * from reservation;
+
+
+
+select * from room r join hotel h on r.hotelid = h.hotelid 
+left join reservation s on  s.roomid = r.roomid
+where r.hotelid = 16
+order by h.hotelid ;
+
+
+
+insert into reservation (`GUESTID`,`HOTELNAME`,`ROOMID`,`STARTDATE`,`ENDDATE`)
+values (1,"hotel1",1,20170101,20170103);
+
+
+
+
+

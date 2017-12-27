@@ -35,14 +35,14 @@
 							<div class="tab-content">
 								<div class="tab-pane fade in active" id="tab-1">
 									<h2>Search and Save on Hotels</h2>
-									<form action="${pageContext.request.contextPath}/search">
+									<form action="${pageContext.request.contextPath}/search" method = "GET">
 										<div class="form-group form-group-lg form-group-icon-left">
 											<i class="fa fa-map-marker input-icon"></i> <label>Where
 												are you going?</label> <input class="typeahead form-control"
 												placeholder="City, Airport, Point of Interest or U.S. Zip Code"
 												type="text" name = "position"/>
 										</div>
-										<div class="input-daterange" data-date-format="M d, D">
+										<div class="input-daterange" data-date-format="mm/dd/yyyy">
 											<div class="row">
 												<div class="col-md-3">
 													<div class="form-group form-group-lg form-group-icon-left">
@@ -62,7 +62,7 @@
 													<div
 														class="form-group form-group-lg form-group-select-plus">
 														<label>Rooms</label>
-														<div class="btn-group btn-group-select-num"
+														<!-- <div class="btn-group btn-group-select-num"
 															data-toggle="buttons">
 															<label class="btn btn-primary active"> <input
 																type="radio" name="options" />1
@@ -73,22 +73,22 @@
 															</label> <label class="btn btn-primary"> <input
 																type="radio" name="options" />3+
 															</label>
-														</div>
-														<select class="form-control hidden">
-															<option>1</option>
-															<option>2</option>
-															<option>3</option>
-															<option selected="selected">4</option>
-															<option>5</option>
-															<option>6</option>
-															<option>7</option>
-															<option>8</option>
-															<option>9</option>
-															<option>10</option>
-															<option>11</option>
-															<option>12</option>
-															<option>13</option>
-															<option>14</option>
+														</div> -->
+														<select class="form-control" name = "rooms">
+															<option value = "1">1</option>
+															<option value = "2">2</option>
+															<option value = "3">3</option>
+															<option value = "4">4</option>
+															<option value = "5">5</option>
+															<option value = "6">6</option>
+															<option value = "7">7</option>
+															<option value = "8">8</option>
+															<option value = "9">9</option>
+															<option value = "10">10</option>
+															<option value = "11">11</option>
+															<option value = "12">12</option>
+															<option value = "13">13</option>
+															<option value = "14">14</option>
 														</select>
 													</div>
 												</div>
@@ -96,7 +96,7 @@
 													<div
 														class="form-group form-group-lg form-group-select-plus">
 														<label>Guests</label>
-														<div class="btn-group btn-group-select-num"
+														<!-- <div class="btn-group btn-group-select-num"
 															data-toggle="buttons">
 															<label class="btn btn-primary active"> <input
 																type="radio" name="options" />1
@@ -107,22 +107,22 @@
 															</label> <label class="btn btn-primary"> <input
 																type="radio" name="options" />3+
 															</label>
-														</div>
-														<select class="form-control hidden">
-															<option>1</option>
-															<option>2</option>
-															<option>3</option>
-															<option selected="selected">4</option>
-															<option>5</option>
-															<option>6</option>
-															<option>7</option>
-															<option>8</option>
-															<option>9</option>
-															<option>10</option>
-															<option>11</option>
-															<option>12</option>
-															<option>13</option>
-															<option>14</option>
+														</div> -->
+														<select class="form-control" name = "guests">
+															<option value = "1">1</option>
+															<option value = "2">2</option>
+															<option value = "3">3</option>
+															<option value = "4">4</option>
+															<option value = "5">5</option>
+															<option value = "6">6</option>
+															<option value = "7">7</option>
+															<option value = "8">8</option>
+															<option value = "9">9</option>
+															<option value = "10">10</option>
+															<option value = "11">11</option>
+															<option value = "12">12</option>
+															<option value = "13">13</option>
+															<option value = "14">14</option>
 														</select>
 													</div>
 												</div>

@@ -1,3 +1,7 @@
+
+<%@page import="java.util.List"%>
+<%@page import="com.hotelbooking.springmvcsecurity.model.Hotel"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
 <html>
 
@@ -26,7 +30,7 @@
 </head>
 
 <body>
-
+	
     <!-- FACEBOOK WIDGET -->
     <div id="fb-root"></div>
     <script>
@@ -479,7 +483,7 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="input-daterange" data-date-format="mm/dd/yyyy">
+                        <div class="input-daterange" data-date-format="MM d, D">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group form-group-icon-left"><i class="fa fa-calendar input-icon input-icon-hightlight"></i>
@@ -572,174 +576,30 @@
             <div class="gap gap-small"></div>
             <h3 class="mb20">Hotels in Popular Destinations</h3>
             <div class="row row-wrap">
-                <div class="col-md-3">
-                    <div class="thumb">
-                        <a class="hover-img" href="#">
-                            <img src="img/800x600.png" alt="Image Alternative text" title="Gaviota en el Top" />
-                            <div class="hover-inner hover-inner-block hover-inner-bottom hover-inner-bg-black hover-hold">
-                                <div class="text-small">
-                                    <h5>New York City Hotels</h5>
-                                    <p>65329 reviews</p>
-                                    <p class="mb0">724 offers from $72</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="thumb">
-                        <a class="hover-img" href="#">
-                            <img src="img/800x600.png" alt="Image Alternative text" title="Sydney Harbour" />
-                            <div class="hover-inner hover-inner-block hover-inner-bottom hover-inner-bg-black hover-hold">
-                                <div class="text-small">
-                                    <h5>Sydney Hotels</h5>
-                                    <p>78901 reviews</p>
-                                    <p class="mb0">582 offers from $73</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="thumb">
-                        <a class="hover-img" href="#">
-                            <img src="img/800x600.png" alt="Image Alternative text" title="Street" />
-                            <div class="hover-inner hover-inner-block hover-inner-bottom hover-inner-bg-black hover-hold">
-                                <div class="text-small">
-                                    <h5>Disney World Hotels</h5>
-                                    <p>55470 reviews</p>
-                                    <p class="mb0">684 offers from $78</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="thumb">
-                        <a class="hover-img" href="#">
-                            <img src="img/400x300.png" alt="Image Alternative text" title="the journey home" />
-                            <div class="hover-inner hover-inner-block hover-inner-bottom hover-inner-bg-black hover-hold">
-                                <div class="text-small">
-                                    <h5>Seattle Hotels</h5>
-                                    <p>51480 reviews</p>
-                                    <p class="mb0">805 offers from $58</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="thumb">
-                        <a class="hover-img" href="#">
-                            <img src="img/800x600.png" alt="Image Alternative text" title="lack of blue depresses me" />
-                            <div class="hover-inner hover-inner-block hover-inner-bottom hover-inner-bg-black hover-hold">
-                                <div class="text-small">
-                                    <h5>Miami Hotels</h5>
-                                    <p>63277 reviews</p>
-                                    <p class="mb0">587 offers from $70</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="thumb">
-                        <a class="hover-img" href="#">
-                            <img src="img/800x600.png" alt="Image Alternative text" title="waipio valley" />
-                            <div class="hover-inner hover-inner-block hover-inner-bottom hover-inner-bg-black hover-hold">
-                                <div class="text-small">
-                                    <h5>Sydney Hotels</h5>
-                                    <p>57546 reviews</p>
-                                    <p class="mb0">407 offers from $77</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="thumb">
-                        <a class="hover-img" href="#">
-                            <img src="img/800x600.png" alt="Image Alternative text" title="the best mode of transport here in maldives" />
-                            <div class="hover-inner hover-inner-block hover-inner-bottom hover-inner-bg-black hover-hold">
-                                <div class="text-small">
-                                    <h5>Virginia Beach Hotels</h5>
-                                    <p>73869 reviews</p>
-                                    <p class="mb0">305 offers from $74</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="thumb">
-                        <a class="hover-img" href="#">
-                            <img src="img/800x600.png" alt="Image Alternative text" title="Upper Lake in New York Central Park" />
-                            <div class="hover-inner hover-inner-block hover-inner-bottom hover-inner-bg-black hover-hold">
-                                <div class="text-small">
-                                    <h5>Atlantic City Hotels</h5>
-                                    <p>59531 reviews</p>
-                                    <p class="mb0">343 offers from $97</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="thumb">
-                        <a class="hover-img" href="#">
-                            <img src="img/800x600.png" alt="Image Alternative text" title="Viva Las Vegas" />
-                            <div class="hover-inner hover-inner-block hover-inner-bottom hover-inner-bg-black hover-hold">
-                                <div class="text-small">
-                                    <h5>Las Vegas</h5>
-                                    <p>67506 reviews</p>
-                                    <p class="mb0">692 offers from $72</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="thumb">
-                        <a class="hover-img" href="#">
-                            <img src="img/800x600.png" alt="Image Alternative text" title="El inevitable paso del tiempo" />
-                            <div class="hover-inner hover-inner-block hover-inner-bottom hover-inner-bg-black hover-hold">
-                                <div class="text-small">
-                                    <h5>Budapest</h5>
-                                    <p>72894 reviews</p>
-                                    <p class="mb0">490 offers from $92</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="thumb">
-                        <a class="hover-img" href="#">
-                            <img src="img/800x600.png" alt="Image Alternative text" title="new york at an angle" />
-                            <div class="hover-inner hover-inner-block hover-inner-bottom hover-inner-bg-black hover-hold">
-                                <div class="text-small">
-                                    <h5>Boston</h5>
-                                    <p>75506 reviews</p>
-                                    <p class="mb0">810 offers from $58</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="thumb">
-                        <a class="hover-img" href="#">
-                            <img src="img/800x600.png" alt="Image Alternative text" title="196_365" />
-                            <div class="hover-inner hover-inner-block hover-inner-bottom hover-inner-bg-black hover-hold">
-                                <div class="text-small">
-                                    <h5>Paris</h5>
-                                    <p>77263 reviews</p>
-                                    <p class="mb0">911 offers from $54</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+            
+            	<%List<Hotel> hotels = (List<Hotel>)request.getAttribute("hotels");
+            	for(int i = 0 ; i < hotels.size() ; i++){
+            	%>
+	            	 <div class="col-md-3">
+	                    <div class="thumb">
+	                        <a class="hover-img" href="${pageContext.request.contextPath}/detail?hotel=<%=hotels.get(i).hotelname%>" >
+	                            <img src = <%=hotels.get(i).image%>  alt="Image Alternative text" title="Gaviota en el Top" />
+	                            <div class="hover-inner hover-inner-block hover-inner-bottom hover-inner-bg-black hover-hold">
+	                                <div class="text-small">
+	                                    <h5><%=hotels.get(i).hotelname%></h5>
+	                                    <p>65329 reviews</p>
+	                                    <p class="mb0">724 offers from $72</p>
+	                                </div>
+	                            </div>
+	                        </a>
+	                    </div>
+	                </div>
+	                
+	               <%} %>
+            	
+            	
+            	
+            	
             </div>
             <div class="gap"></div>
             <h3 class="mb20">Top Deals</h3>
