@@ -4,6 +4,12 @@
     Author     : PC
 --%>
 
+<%@page import="com.hotelbooking.springmvcsecurity.dao.impl.HotelDAOImpl"%>
+<%@page import="com.hotelbooking.springmvcsecurity.dao.HotelDAO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.hotelbooking.springmvcsecurity.model.Guestreview"%>
+<%@page import="java.util.List"%>
+<%@page import="com.hotelbooking.springmvcsecurity.model.Hotel"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
 <html>
@@ -36,6 +42,10 @@
 
     <!-- FACEBOOK WIDGET -->
     <div id="fb-root"></div>
+     <%Hotel hotel = (Hotel) request.getAttribute("hotel");
+       System.out.println(hotel.getRoom().size());
+       List<Guestreview> listReviews = (List<Guestreview>) request.getAttribute("reviews");                
+     %>
     <script>
         (function(d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
@@ -485,20 +495,20 @@
                 </li>
                 <li><a href="#">New York City Hotels</a>
                 </li>
-                <li class="active">InterContinental New York Barclay</li>
+                <li class="active"><%=hotel.getHotelname() %></li>
             </ul>
             <div class="booking-item-details">
                 <header class="booking-item-header">
                     <div class="row">
                         <div class="col-md-9">
-                            <h2 class="lh1em">InterContinental New York Barclay</h2>
-                            <p class="lh1em text-small"><i class="fa fa-map-marker"></i> 6782 Sarasea Circle, Siesta Key, FL 34242</p>
+                            <h2 class="lh1em"><%=hotel.getHotelname()%></h2>
+                            <p class="lh1em text-small"><i class="fa fa-map-marker"></i> <%=hotel.getHotelstate()%>, <%=hotel.getHotelcity()%>, <%=hotel.getHotelcountry()%></p>
                             <ul class="list list-inline text-small">
                                 <li><a href="#"><i class="fa fa-envelope"></i> Hotel E-mail</a>
                                 </li>
                                 <li><a href="#"><i class="fa fa-home"></i> Hotel Website</a>
                                 </li>
-                                <li><i class="fa fa-phone"></i> +1 (621) 511-9145</li>
+                                <li><i class="fa fa-phone"></i><%=hotel.getHotelphone()%></li>
                             </ul>
                         </div>
                         <div class="col-md-3">
@@ -803,7 +813,7 @@
                                 </div>
                             </div>
                             <h4>About the Hotel</h4>
-                            <p>Egestas elit morbi magna montes felis venenatis purus rutrum parturient venenatis massa cursus congue mi himenaeos integer aenean consectetur lacinia</p>
+                            <p><%=hotel.getDescription() %></p>
                         </div>
                     </div>
                 </div>
@@ -896,18 +906,28 @@
                             </form>
                         </div>
                         <div class="gap gap-small"></div>
+                       
                         <ul class="booking-list">
-                            <li>
-                                <a class="booking-item">
+                        	
+                        	<%for(int i = 0; i < hotel.getRoom().size() ; i++){ %>
+                        		<li>
+                                <a class="booking-item" id = '<%=hotel.getRoom().get(i).getRoomid()%>' onclick = 'myFunction(<%=hotel.getRoom().get(i).getRoomid()%>)'>
                                     <div class="row">
                                         <div class="col-md-3">
                                             <img src="img/800x600.png" alt="Image Alternative text" title="hotel 2" />
                                         </div>
                                         <div class="col-md-6">
-                                            <h5 class="booking-item-title">Double Room with Town View</h5>
+                                        	<%if(hotel.getRoom().get(i).getRoomtypeid() == 1){ %>
+                                        		<h5 class="booking-item-title">Single Room</h5>
+                                        	<%} else if(hotel.getRoom().get(i).getRoomtypeid() == 2) {%>
+                                        		<h5 class="booking-item-title">Double Room</h5>
+                                        	<%} else { %>
+                                        		<h5 class="booking-item-title">Triple Room</h5>
+                                            <%} %>
                                             <p class="text-small">Rhoncus per maecenas pellentesque diam potenti mauris ornare ornare habitasse ullamcorper nibh orci</p>
-                                            <ul class="booking-item-features booking-item-features-sign clearfix">
-                                                <li rel="tooltip" data-placement="top" title="Adults Occupancy"><i class="fa fa-male"></i><span class="booking-item-feature-sign">x 3</span>
+                                            <%if(hotel.getRoom().get(i).getRoomtypeid() == 1){ %>
+                                        		 <ul class="booking-item-features booking-item-features-sign clearfix">
+                                                <li rel="tooltip" data-placement="top" title="Adults Occupancy"><i class="fa fa-male"></i><span class="booking-item-feature-sign">x 2</span>
                                                 </li>
                                                 <li rel="tooltip" data-placement="top" title="Children Occupancy"><i class="im im-children"></i><span class="booking-item-feature-sign">x 1</span>
                                                 </li>
@@ -916,6 +936,30 @@
                                                 <li rel="tooltip" data-placement="top" title="Room footage (square feet)"><i class="im im-width"></i><span class="booking-item-feature-sign">650</span>
                                                 </li>
                                             </ul>
+                                        	<%} else if (hotel.getRoom().get(i).getRoomtypeid() == 2){%>
+                                        		 <ul class="booking-item-features booking-item-features-sign clearfix">
+                                                <li rel="tooltip" data-placement="top" title="Adults Occupancy"><i class="fa fa-male"></i><span class="booking-item-feature-sign">x 4</span>
+                                                </li>
+                                                <li rel="tooltip" data-placement="top" title="Children Occupancy"><i class="im im-children"></i><span class="booking-item-feature-sign">x 2</span>
+                                                </li>
+                                                <li rel="tooltip" data-placement="top" title="Beds"><i class="im im-bed"></i><span class="booking-item-feature-sign">x 2</span>
+                                                </li>
+                                                <li rel="tooltip" data-placement="top" title="Room footage (square feet)"><i class="im im-width"></i><span class="booking-item-feature-sign">650</span>
+                                                </li>
+                                            </ul>
+                                        	<%} else{%>
+                                        		 <ul class="booking-item-features booking-item-features-sign clearfix">
+                                                <li rel="tooltip" data-placement="top" title="Adults Occupancy"><i class="fa fa-male"></i><span class="booking-item-feature-sign">x 6</span>
+                                                </li>
+                                                <li rel="tooltip" data-placement="top" title="Children Occupancy"><i class="im im-children"></i><span class="booking-item-feature-sign">x 3</span>
+                                                </li>
+                                                <li rel="tooltip" data-placement="top" title="Beds"><i class="im im-bed"></i><span class="booking-item-feature-sign">x 3</span>
+                                                </li>
+                                                <li rel="tooltip" data-placement="top" title="Room footage (square feet)"><i class="im im-width"></i><span class="booking-item-feature-sign">650</span>
+                                                </li>
+                                            </ul>
+                                        	
+                                           <%} %>
                                             <ul class="booking-item-features booking-item-features-small clearfix">
                                                 <li rel="tooltip" data-placement="top" title="Air Conditioning"><i class="im im-air"></i>
                                                 </li>
@@ -935,177 +979,22 @@
                                                 </li>
                                             </ul>
                                         </div>
-                                        <div class="col-md-3"><span class="booking-item-price">$462</span><span>/night</span><span class="btn btn-primary">Book</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="booking-item">
-                                    <div class="row">
                                         <div class="col-md-3">
-                                            <img src="img/800x600.png" alt="Image Alternative text" title="hotel PORTO BAY RIO INTERNACIONAL rooftop pool" />
-                                        </div>
-                                        <div class="col-md-6">
-                                            <h5 class="booking-item-title">Superior Penthouse</h5>
-                                            <p class="text-small">Platea tempus gravida cras felis cum eleifend nisl fermentum ultricies conubia a facilisis</p>
-                                            <ul class="booking-item-features booking-item-features-sign clearfix">
-                                                <li rel="tooltip" data-placement="top" title="Adults Occupancy"><i class="fa fa-male"></i><span class="booking-item-feature-sign">x 1</span>
-                                                </li>
-                                                <li rel="tooltip" data-placement="top" title="Beds"><i class="im im-bed"></i><span class="booking-item-feature-sign">x 1</span>
-                                                </li>
-                                                <li rel="tooltip" data-placement="top" title="Room footage (square feet)"><i class="im im-width"></i><span class="booking-item-feature-sign">620</span>
-                                                </li>
-                                            </ul>
-                                            <ul class="booking-item-features booking-item-features-small clearfix">
-                                                <li rel="tooltip" data-placement="top" title="Flat Screen TV"><i class="im im-tv"></i>
-                                                </li>
-                                                <li rel="tooltip" data-placement="top" title="Bathtub"><i class="im im-bathtub"></i>
-                                                </li>
-                                                <li rel="tooltip" data-placement="top" title="Patio"><i class="im im-patio"></i>
-                                                </li>
-                                                <li rel="tooltip" data-placement="top" title="SPA tub"><i class="im im-spa"></i>
-                                                </li>
-                                                <li rel="tooltip" data-placement="top" title="Terrace"><i class="im im-terrace"></i>
-                                                </li>
-                                                <li rel="tooltip" data-placement="top" title="Washing Machine"><i class="im im-washing-machine"></i>
-                                                </li>
-                                                <li rel="tooltip" data-placement="top" title="Pool"><i class="im im-pool"></i>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-md-3"><span class="booking-item-price">$455</span><span>/night</span><span class="btn btn-primary">Book</span>
+                                        <span class="booking-item-price"><%=hotel.getRoom().get(i).getCost()%></span>
+                                        <span>/night</span>
+                                        <span class="btn btn-primary" id = 'button<%=hotel.getRoom().get(i).getRoomid()%>'>
+                                        Book</span>
                                         </div>
                                     </div>
                                 </a>
                             </li>
-                            <li>
-                                <a class="booking-item">
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <img src="img/800x600.png" alt="Image Alternative text" title="LHOTEL PORTO BAY SAO PAULO lobby" />
-                                        </div>
-                                        <div class="col-md-6">
-                                            <h5 class="booking-item-title">Standard Double room</h5>
-                                            <p class="text-small">Ut gravida sed habitant inceptos pulvinar vivamus aptent aenean pellentesque vulputate metus ante</p>
-                                            <ul class="booking-item-features booking-item-features-sign clearfix">
-                                                <li rel="tooltip" data-placement="top" title="Adults Occupancy"><i class="fa fa-male"></i><span class="booking-item-feature-sign">x 3</span>
-                                                </li>
-                                                <li rel="tooltip" data-placement="top" title="Children Occupancy"><i class="im im-children"></i><span class="booking-item-feature-sign">x 2</span>
-                                                </li>
-                                                <li rel="tooltip" data-placement="top" title="Beds"><i class="im im-bed"></i><span class="booking-item-feature-sign">x 2</span>
-                                                </li>
-                                                <li rel="tooltip" data-placement="top" title="Room footage (square feet)"><i class="im im-width"></i><span class="booking-item-feature-sign">540</span>
-                                                </li>
-                                            </ul>
-                                            <ul class="booking-item-features booking-item-features-small clearfix">
-                                                <li rel="tooltip" data-placement="top" title="Air Conditioning"><i class="im im-air"></i>
-                                                </li>
-                                                <li rel="tooltip" data-placement="top" title="Flat Screen TV"><i class="im im-tv"></i>
-                                                </li>
-                                                <li rel="tooltip" data-placement="top" title="Bathtub"><i class="im im-bathtub"></i>
-                                                </li>
-                                                <li rel="tooltip" data-placement="top" title="Patio"><i class="im im-patio"></i>
-                                                </li>
-                                                <li rel="tooltip" data-placement="top" title="Soundproof"><i class="im im-soundproof"></i>
-                                                </li>
-                                                <li rel="tooltip" data-placement="top" title="SPA tub"><i class="im im-spa"></i>
-                                                </li>
-                                                <li rel="tooltip" data-placement="top" title="Terrace"><i class="im im-terrace"></i>
-                                                </li>
-                                                <li rel="tooltip" data-placement="top" title="Washing Machine"><i class="im im-washing-machine"></i>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-md-3"><span class="booking-item-price">$331</span><span>/night</span><span class="btn btn-primary">Book</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="booking-item">
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <img src="img/800x600.png" alt="Image Alternative text" title="hotel 1" />
-                                        </div>
-                                        <div class="col-md-6">
-                                            <h5 class="booking-item-title">Junior Suite</h5>
-                                            <p class="text-small">Vehicula senectus fusce diam varius urna nibh nunc maecenas euismod tincidunt convallis ultricies</p>
-                                            <ul class="booking-item-features booking-item-features-sign clearfix">
-                                                <li rel="tooltip" data-placement="top" title="Adults Occupancy"><i class="fa fa-male"></i><span class="booking-item-feature-sign">x 1</span>
-                                                </li>
-                                                <li rel="tooltip" data-placement="top" title="Children Occupancy"><i class="im im-children"></i><span class="booking-item-feature-sign">x 2</span>
-                                                </li>
-                                                <li rel="tooltip" data-placement="top" title="Beds"><i class="im im-bed"></i><span class="booking-item-feature-sign">x 2</span>
-                                                </li>
-                                                <li rel="tooltip" data-placement="top" title="Room footage (square feet)"><i class="im im-width"></i><span class="booking-item-feature-sign">420</span>
-                                                </li>
-                                            </ul>
-                                            <ul class="booking-item-features booking-item-features-small clearfix">
-                                                <li rel="tooltip" data-placement="top" title="Air Conditioning"><i class="im im-air"></i>
-                                                </li>
-                                                <li rel="tooltip" data-placement="top" title="Mini Bar"><i class="im im-bar"></i>
-                                                </li>
-                                                <li rel="tooltip" data-placement="top" title="Bathtub"><i class="im im-bathtub"></i>
-                                                </li>
-                                                <li rel="tooltip" data-placement="top" title="Soundproof"><i class="im im-soundproof"></i>
-                                                </li>
-                                                <li rel="tooltip" data-placement="top" title="SPA tub"><i class="im im-spa"></i>
-                                                </li>
-                                                <li rel="tooltip" data-placement="top" title="Terrace"><i class="im im-terrace"></i>
-                                                </li>
-                                                <li rel="tooltip" data-placement="top" title="Pool"><i class="im im-pool"></i>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-md-3"><span class="booking-item-price">$481</span><span>/night</span><span class="btn btn-primary">Book</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="booking-item">
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <img src="img/800x600.png" alt="Image Alternative text" title="The pool" />
-                                        </div>
-                                        <div class="col-md-6">
-                                            <h5 class="booking-item-title">Family Suite</h5>
-                                            <p class="text-small">Hac felis torquent congue consectetur lobortis odio iaculis aenean laoreet neque natoque arcu</p>
-                                            <ul class="booking-item-features booking-item-features-sign clearfix">
-                                                <li rel="tooltip" data-placement="top" title="Adults Occupancy"><i class="fa fa-male"></i><span class="booking-item-feature-sign">x 2</span>
-                                                </li>
-                                                <li rel="tooltip" data-placement="top" title="Children Occupancy"><i class="im im-children"></i><span class="booking-item-feature-sign">x 1</span>
-                                                </li>
-                                                <li rel="tooltip" data-placement="top" title="Beds"><i class="im im-bed"></i><span class="booking-item-feature-sign">x 2</span>
-                                                </li>
-                                                <li rel="tooltip" data-placement="top" title="Room footage (square feet)"><i class="im im-width"></i><span class="booking-item-feature-sign">240</span>
-                                                </li>
-                                            </ul>
-                                            <ul class="booking-item-features booking-item-features-small clearfix">
-                                                <li rel="tooltip" data-placement="top" title="Air Conditioning"><i class="im im-air"></i>
-                                                </li>
-                                                <li rel="tooltip" data-placement="top" title="Mini Bar"><i class="im im-bar"></i>
-                                                </li>
-                                                <li rel="tooltip" data-placement="top" title="Bathtub"><i class="im im-bathtub"></i>
-                                                </li>
-                                                <li rel="tooltip" data-placement="top" title="Kitchen"><i class="im im-kitchen"></i>
-                                                </li>
-                                                <li rel="tooltip" data-placement="top" title="Soundproof"><i class="im im-soundproof"></i>
-                                                </li>
-                                                <li rel="tooltip" data-placement="top" title="Washing Machine"><i class="im im-washing-machine"></i>
-                                                </li>
-                                                <li rel="tooltip" data-placement="top" title="Pool"><i class="im im-pool"></i>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-md-3"><span class="booking-item-price">$402</span><span>/night</span><span class="btn btn-primary">Book</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
+                        	<%} %>
+                        	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                        <button class="btn btn-primary" onclick = "call()">Submit</button> 
                         </ul>
+                        
                     </div>
+                   
                     <div class="col-md-4">
                         <h4>Hotels Near InterContinental New York Barclay</h4>
                         <ul class="booking-list">
@@ -1272,6 +1161,7 @@
                 <div class="row row-wrap">
                     <div class="col-md-8">
                         <ul class="booking-item-reviews list">
+                            <%for(int i = 0 ; i < listReviews.size() ; i ++) {%>
                             <li>
                                 <div class="row">
                                     <div class="col-md-2">
@@ -1279,14 +1169,14 @@
                                             <a class="booking-item-review-person-avatar round" href="#">
                                                 <img src="img/70x70.png" alt="Image Alternative text" title="Good job" />
                                             </a>
-                                            <p class="booking-item-review-person-name"><a href="#">John Doe</a>
+                                            <p class="booking-item-review-person-name"><a href="#"><%=listReviews.get(i).getGuestname() %></a>
                                             </p>
                                             <p class="booking-item-review-person-loc">Palm Beach, FL</p><small><a href="#">126 Reviews</a></small>
                                         </div>
                                     </div>
                                     <div class="col-md-10">
                                         <div class="booking-item-review-content">
-                                            <h5>"Libero nulla tempor platea felis pellentesque"</h5>
+                                            <h5><%=listReviews.get(i).getReviewtitle()%></h5>
                                             <ul class="icon-group booking-item-rating-stars">
                                                 <li><i class="fa fa-star"></i>
                                                 </li>
@@ -1299,98 +1189,14 @@
                                                 <li><i class="fa fa-star"></i>
                                                 </li>
                                             </ul>
-                                            <p>Class tellus erat a faucibus sociosqu volutpat vulputate volutpat placerat proin lorem congue ac dui sagittis convallis tortor orci risus adipiscing vel purus sagittis eros eros proin per sed justo fringilla quis convallis metus quam tortor donec curae pretium laoreet<span class="booking-item-review-more"> Magnis lacus libero donec vitae ultricies penatibus natoque condimentum pulvinar neque hac suspendisse litora ullamcorper ultrices porttitor dignissim tincidunt class non metus duis eget amet morbi conubia cursus vivamus suspendisse feugiat enim tempus morbi amet fermentum potenti duis vulputate primis velit vel in felis nascetur habitant venenatis lacinia adipiscing malesuada ultrices torquent euismod a viverra augue sociis vehicula iaculis sem nullam urna sem lectus cras amet mattis sem fringilla tempus</span>
+                                            <p><%=listReviews.get(i).getReview() %></span>
                                             </p>
-                                            <div class="booking-item-review-more-content">
+                                            <!-- <div class="booking-item-review-more-content">
                                                 <p>Dis eros phasellus mollis augue ornare curabitur non tempus facilisis duis dictumst sit auctor sodales suspendisse nullam facilisi magnis pretium malesuada sit cum id dapibus ac est ullamcorper suscipit per senectus ultricies et diam eu</p>
                                                 <p>Massa orci habitasse nostra elit phasellus mus euismod elementum nisl nulla et blandit cras torquent aliquam tempor malesuada egestas montes dolor integer vehicula et curae auctor turpis dictumst gravida egestas ligula quis sodales augue laoreet vehicula erat habitant dictum eget pharetra eros montes nec platea mi taciti leo integer iaculis volutpat semper integer mattis eros curae rutrum cursus metus lacus cras ante consectetur congue mus imperdiet</p>
                                                 <p class="text-small mt20">Stayed March 2014, traveled as a couple</p>
-                                                <div class="row">
-                                                    <div class="col-md-4">
-                                                        <ul class="list booking-item-raiting-summary-list">
-                                                            <li>
-                                                                <div class="booking-item-raiting-list-title">Sleep</div>
-                                                                <ul class="icon-group booking-item-rating-stars">
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                </ul>
-                                                            </li>
-                                                            <li>
-                                                                <div class="booking-item-raiting-list-title">Location</div>
-                                                                <ul class="icon-group booking-item-rating-stars">
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                </ul>
-                                                            </li>
-                                                            <li>
-                                                                <div class="booking-item-raiting-list-title">Service</div>
-                                                                <ul class="icon-group booking-item-rating-stars">
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                </ul>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <ul class="list booking-item-raiting-summary-list">
-                                                            <li>
-                                                                <div class="booking-item-raiting-list-title">Clearness</div>
-                                                                <ul class="icon-group booking-item-rating-stars">
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                </ul>
-                                                            </li>
-                                                            <li>
-                                                                <div class="booking-item-raiting-list-title">Rooms</div>
-                                                                <ul class="icon-group booking-item-rating-stars">
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                    <li><i class="fa fa-smile-o"></i>
-                                                                    </li>
-                                                                </ul>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                                
+                                            </div> -->
                                             <div class="booking-item-review-expand"><span class="booking-item-review-expand-more">More <i class="fa fa-angle-down"></i></span><span class="booking-item-review-expand-less">Less <i class="fa fa-angle-up"></i></span>
                                             </div>
                                             <p class="booking-item-review-rate">Was this review helpful?
@@ -1400,7 +1206,8 @@
                                     </div>
                                 </div>
                             </li>
-                           
+                            
+                           <%} %>
                         </ul>
                         <div class="row wrap">
                             <div class="col-md-5">
@@ -1434,16 +1241,17 @@
                         <div class="gap gap-small"></div>
                         <div class="box bg-gray">
                             <h3>Write a Review</h3>
-                            <form>
+                            <form action="${pageContext.request.contextPath}/review"
+							method="POST">
                                 <div class="row">
                                     <div class="col-md-8">
                                         <div class="form-group">
                                             <label>Review Title</label>
-                                            <input class="form-control" type="text" />
+                                            <input class="form-control" type="text" name = "reviewtitle"/>
                                         </div>
                                         <div class="form-group">
                                             <label>Review Text</label>
-                                            <textarea class="form-control" rows="6"></textarea>
+                                            <textarea class="form-control" rows="6" name = "reviewtext"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -1524,10 +1332,11 @@
                                                 </ul>
                                             </li>
                                         </ul>
-                                        <input class="btn btn-primary" type="submit" value="Leave a Review" />
+                                        <input class="btn btn-primary" type = "submit" value="Leave a Review"/>
                                     </div>
                                 </div>
                             </form>
+                            
                         </div>
                     </div>
                 </div>
@@ -1625,15 +1434,44 @@
         <script src="js/countdown.js"></script>
         <script src="js/gridrotator.js"></script>
         <script src="js/custom.js"></script>
+        <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> --> 
     </div>
 </body>
+<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
 <script>
-	function myFunction(){
-		var review = document.getElementById("review");
-		review.value = "Y";
-		location.reload();
-	}
-	
+	var dataArrayToSend = [];
+	 function myFunction(temp){
+		 var aclass = document.getElementById('button'+temp).className;
+		 if(aclass == ""){
+			 var index = dataArrayToSend.indexOf(temp);
+			 dataArrayToSend.splice(index, 1);
+			 document.getElementById('button'+temp).className = "btn btn-primary";
+		 }else{
+			 dataArrayToSend.push(temp);
+			 document.getElementById('button'+temp).className = "";
+		 }
+		 
+		 
+	} 
+	 function call(){
+		 if(dataArrayToSend.length >0){
+			 window.location =  '<%=request.getContextPath()%>'+'/payment?array='+dataArrayToSend
+			 <%-- $.ajax({
+				    type : "GET",
+				    url : "/HotelBooking/payment",
+				    data : "array="+dataArrayToSend,  //multiple array, just add something like "&b="+b ...
+				    success : function(response) {
+				       // do something ... 
+				    },
+				    error : function(e) {
+				       alert('Error: ' + <%request.getContextPath()%>;
+				    }
+				});  --%>
+		 }
+		 
+		
+		
+	} 
 	
 </script>
 </html>

@@ -9,9 +9,11 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import com.hotelbooking.ConnectionUtil.MySQLConnUtils;
 import com.hotelbooking.springmvcsecurity.dao.HotelDAO;
 import com.hotelbooking.springmvcsecurity.dao.UserInfoDAO;
 import com.hotelbooking.springmvcsecurity.mapper.UserInfoMapper;
+import com.hotelbooking.springmvcsecurity.model.Guestreview;
 import com.hotelbooking.springmvcsecurity.model.Hotel;
 import com.hotelbooking.springmvcsecurity.model.Resdetail;
 import com.hotelbooking.springmvcsecurity.model.Room;
@@ -26,6 +28,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
+	
+	public HotelDAOImpl() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	@Autowired
 	public HotelDAOImpl(DataSource dataSource) {
@@ -65,7 +72,7 @@ public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
 			System.out.println(listHotel.size());
 			for(Hotel hotel : listHotel){
 				StringBuffer sql2 = new StringBuffer();
-				sql2.append("select * from room r join hotel h on r.hotelid = h.hotelid left join reservation s on  s.roomid = r.roomid where r.hotelid = ?");
+				sql2.append("select * from room r join hotel h on r.hotelid = h.hotelid left join reservation s on  s.roomid = r.roomid where r.hotelid = ? order by r.roomtypeid ");
 				
 				ps =  conn.prepareStatement(sql2.toString());
 				ps.setInt(1, hotel.getHotelid());
@@ -129,5 +136,103 @@ public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
 		
 		return listHotel;
 	}
+
+	public void insertReview(String reviewTitle, String reviewText, int hotelid, int guestid, String guestname, Connection conn) {
+		// TODO Auto-generated method stub
+		String sql = "insert into guestreview(`REVIEW`,`REVIEWTITLE`,`RATING`,`GUESTID`,`HOTELID`,`GUESTNAME`)"
+				+ "values (?,?,?,?,?,?)";
+		try {
+			PreparedStatement ps =  conn.prepareStatement(sql);
+			ps.setString(1, reviewText);
+			ps.setString(2, reviewTitle);
+			ps.setInt(3, 0);
+			ps.setInt(4, guestid);
+			ps.setInt(5, hotelid);
+			ps.setString(6, guestname);
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void insertReview(String reviewTitle, String reviewText, int hotelid, int guestid,String guestname) {
+		// TODO Auto-generated method stub
+		String sql = "insert into guestreview(`REVIEW`,`REVIEWTITLE`,`RATING`,`GUESTID`,`HOTELID`,`GUESTNAME`)"
+				+ "values (?,?,?,?,?,?)";
+		System.out.println(sql);
+		try {
+			Connection conn = MySQLConnUtils.getMySQLConnection();
+			PreparedStatement ps =  conn.prepareStatement(sql);
+			ps.setString(1, reviewText);
+			ps.setString(2, reviewTitle);
+			ps.setInt(3, 0);
+			ps.setInt(4, guestid);
+			ps.setInt(5, hotelid);
+			ps.setString(6, guestname);
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public List<Guestreview> getReview(int hotelid, Connection conn) {
+		// TODO Auto-generated method stub
+		String sql = "select * from GUESTREVIEW where hotelid = ?";
+		List<Guestreview> list = new ArrayList<Guestreview>();
+		try {
+			PreparedStatement ps =  conn.prepareStatement(sql);
+			ps.setInt(1, hotelid);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while (rs.next()){
+				Guestreview guest = new Guestreview(rs.getInt("GUESTREVIEWID"),
+						rs.getString("REVIEW"),
+						rs.getString("REVIEWTITLE"),
+						rs.getInt("RATING"),
+						rs.getInt("GUESTID"),
+						rs.getInt("HOTELID"),
+						rs.getString("GUESTNAME"));
+				list.add(guest);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	public void insertReservation(int guestid, String hotelname, int roomid, int startdate, int enddate) {
+		// TODO Auto-generated method stub
+		String sql = "insert into reservation (`GUESTID`,`HOTELNAME`,`ROOMID`,`STARTDATE`,`ENDDATE`)"
+				+ "values (?,?,?,?,?)";
+		System.out.println(sql);
+		try {
+			Connection conn = MySQLConnUtils.getMySQLConnection();
+			PreparedStatement ps =  conn.prepareStatement(sql);
+			ps.setInt(1, guestid);
+			ps.setString(2, hotelname);
+			ps.setInt(3, roomid);
+			ps.setInt(4, startdate);
+			ps.setInt(5, enddate);
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	
 }

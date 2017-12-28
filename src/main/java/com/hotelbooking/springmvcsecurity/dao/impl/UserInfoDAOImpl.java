@@ -103,4 +103,22 @@ public class UserInfoDAOImpl extends JdbcDaoSupport implements UserInfoDAO {
 		return result;
 	}
 
+	public int getUserId(String userName,Connection conn) {
+		// TODO Auto-generated method stub
+		String sql = "select * from guest where guestname = \""+userName.trim()+"\"";
+		try {
+			PreparedStatement ps = (PreparedStatement) conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()){
+				return rs.getInt("GUESTID");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
+	
+
 }

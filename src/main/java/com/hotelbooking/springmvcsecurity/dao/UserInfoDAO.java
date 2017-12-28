@@ -15,4 +15,6 @@ public interface UserInfoDAO {
     public UserInfo findUserInfoByMail(String email);
     
     public String SignUp(String email,String username, String password, Connection conn);
+    
+    public int getUserId(String userName,Connection conn);
 }

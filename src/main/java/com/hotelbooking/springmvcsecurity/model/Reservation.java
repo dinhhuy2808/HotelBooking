@@ -7,6 +7,8 @@ public class Reservation {
 	int resdetailid;
 	int billid;
 	int roomid;
+	String roomname;
+	int numberofnight;
 	public int getReservationid() {
 		return reservationid;
 	}
@@ -42,6 +44,18 @@ public class Reservation {
 	}
 	public void setRoomid(int roomid) {
 		this.roomid = roomid;
+	}
+	public String getRoomname() {
+		return roomname;
+	}
+	public void setRoomname(String roomname) {
+		this.roomname = roomname;
+	}
+	public int getNumberofnight() {
+		return numberofnight;
+	}
+	public void setNumberofnight(int numberofnight) {
+		this.numberofnight = numberofnight;
 	}
 	
 	

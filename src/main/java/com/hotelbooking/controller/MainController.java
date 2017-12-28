@@ -3,6 +3,9 @@ package com.hotelbooking.controller;
 import java.security.Principal;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,8 +19,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.hotelbooking.ConnectionUtil.MySQLConnUtils;
 import com.hotelbooking.springmvcsecurity.dao.HotelDAO;
 import com.hotelbooking.springmvcsecurity.dao.UserInfoDAO;
+import com.hotelbooking.springmvcsecurity.model.Guestreview;
 import com.hotelbooking.springmvcsecurity.model.Hotel;
 import com.hotelbooking.springmvcsecurity.model.Resdetail;
+import com.hotelbooking.springmvcsecurity.model.Reservation;
+import com.hotelbooking.springmvcsecurity.model.Room;
  
 @Controller
 public class MainController {
@@ -26,13 +32,10 @@ public class MainController {
 	 @Autowired
 	    private HotelDAO hotelDAO;
 	 List<Hotel> hotels = new ArrayList<Hotel>();
-  /* @RequestMapping(value = { "/", "/welcome" }, method = RequestMethod.GET)
-   public String welcomePage(Model model) {
-       model.addAttribute("title", "Welcome");
-       model.addAttribute("message", "This is welcome page!");
-       return "welcomePage";
-   }*/
+	 Hotel hotel = new Hotel();
 	Connection connection;
+	int startdate = 0;
+	int enddate = 0;
    @RequestMapping(value = "/admin", method = RequestMethod.GET)
    public String adminPage(Model model) {
        return "adminPage";
@@ -100,8 +103,8 @@ public class MainController {
 	   String [] startConv = start.split("/");
 	   String [] endConv = end.split("/");
 	   
-	   int startdate = Integer.parseInt(startConv[2]+startConv[0]+startConv[1]);
-	   int enddate = Integer.parseInt(endConv[2]+endConv[0]+endConv[1]);
+	   startdate = Integer.parseInt(startConv[2]+startConv[0]+startConv[1]);
+	   enddate = Integer.parseInt(endConv[2]+endConv[0]+endConv[1]);
 	 
 	   Resdetail resdetail = new Resdetail();
 	   resdetail.setPosition(position);
@@ -116,15 +119,13 @@ public class MainController {
        return "hotel-search";
    }
  
-   @RequestMapping(value = "/detail", method={RequestMethod.POST,RequestMethod.GET})
+   @RequestMapping(value = "/detail", method=RequestMethod.GET)
    public String detail(Model model, Principal principal,
-		   				@RequestParam("hotel") String hotelname,
-		   				@RequestParam("review") String review) {
+		   				@RequestParam("hotel") String hotelname) {
 	   System.out.println(hotelname);
 	   
 	   
-	   System.out.println(model.asMap());
-	   Hotel hotel = new Hotel();
+	   
 	   
 	   for(Hotel read:hotels){
 		   if(read.hotelname.trim().equals(hotelname.trim())){
@@ -132,11 +133,54 @@ public class MainController {
 			   break;
 		   }
 	   }
-	   
+	   List<Guestreview> list = hotelDAO.getReview(hotel.hotelid, connection);
 	   model.addAttribute("hotel",hotel);
-	   
+	   model.addAttribute("reviews",list);
 	   
        return "hotel-detail";
+   }
+   
+   @RequestMapping(value = "/review", method=RequestMethod.POST)
+   public String review(Model model, Principal principal,
+		   				@RequestParam("reviewtitle") String reviewtitle,
+		   				@RequestParam("reviewtext") String reviewtext) {
+	   System.out.println(hotel.getHotelname());
+	   
+	   hotelDAO.insertReview(reviewtitle, reviewtext, hotel.hotelid, 0, principal.getName());
+	   
+       return "redirect:" +"detail?hotel="+hotel.getHotelname();
+   }
+   
+   @RequestMapping(value = "/payment", method=RequestMethod.GET)
+   public String payment(Model model, Principal principal,
+		   				@RequestParam("array") List<Integer> array) {
+	   System.out.println(hotel.getHotelname());
+	   List<Reservation> listReserv = new ArrayList<Reservation>();
+	   int total = 0;
+		   for(Integer read:array){
+			   hotelDAO.insertReservation(userInfoDAO.getUserId(principal.getName(), connection), hotel.hotelname, read, startdate, enddate);
+			   int i = 0;
+			  while(i < hotel.getRoom().size()){
+				  if(hotel.getRoom().get(i).getRoomid() == read){
+					  total += hotel.getRoom().get(i).getCost();
+					  i++;
+					 
+				  }else{
+					  System.out.println("remove: "+hotel.getRoom().get(i).getRoomid());
+					  hotel.getRoom().remove(i);
+					  System.out.println(hotel.getRoom().size());
+				  }
+		   }
+	   }
+		   System.out.println(hotel.getRoom().size());
+		   String night = minusDate(Integer.toString(startdate), Integer.toString(enddate));
+		   
+		   total =total * Integer.parseInt(night);
+		   model.addAttribute("hotel",hotel);
+		   model.addAttribute("total",total);
+		   model.addAttribute("night",night);
+	   
+       return "hotel-payment";
    }
    
    @RequestMapping(value = "/403", method = RequestMethod.GET)
@@ -151,4 +195,11 @@ public class MainController {
        }
        return "403Page";
    }
+   
+   protected String minusDate(String from,String now){
+		DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyyMMdd");
+		LocalDate datefrom = LocalDate.parse(from, f);
+		LocalDate datenow = LocalDate.parse(now, f);
+		return Integer.toString(Period.between(datefrom, datenow).getDays());
+	}
 }
