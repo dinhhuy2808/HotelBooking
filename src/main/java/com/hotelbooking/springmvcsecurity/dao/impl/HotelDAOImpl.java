@@ -157,7 +157,7 @@ public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
 		}
 	}
 
-	public void insertReview(String reviewTitle, String reviewText, int hotelid, int guestid,String guestname) {
+	public void insertReview(String reviewTitle, String reviewText, int hotelid, int guestid,String guestname,int rating) {
 		// TODO Auto-generated method stub
 		String sql = "insert into guestreview(`REVIEW`,`REVIEWTITLE`,`RATING`,`GUESTID`,`HOTELID`,`GUESTNAME`)"
 				+ "values (?,?,?,?,?,?)";
@@ -167,7 +167,7 @@ public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
 			PreparedStatement ps =  conn.prepareStatement(sql);
 			ps.setString(1, reviewText);
 			ps.setString(2, reviewTitle);
-			ps.setInt(3, 0);
+			ps.setInt(3, rating);
 			ps.setInt(4, guestid);
 			ps.setInt(5, hotelid);
 			ps.setString(6, guestname);

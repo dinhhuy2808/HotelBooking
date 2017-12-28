@@ -40,7 +40,7 @@ CREATE TABLE HOTEL
 	HOTELSTATE VARCHAR(20)  NULL,
 	HOTELCITY VARCHAR(20)  NULL,
 	HOTELPHONE NUMERIC(11,0)  NULL,
-    DESCRIPTION VARCHAR(65535) NULL,
+    DESCRIPTION VARCHAR(2000) NULL,
     IMAGE VARCHAR(256)  NULL
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -75,14 +75,17 @@ CREATE TABLE RESERVATION
 CREATE TABLE GUESTREVIEW 
 (
 	GUESTREVIEWID INT  NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	REVIEW VARCHAR(65535),
+	REVIEW VARCHAR(20000),
+    REVIEWTITLE VARCHAR(255),
 	RATING NUMERIC(5,0),
 	GUESTID INT,
-	HOTELID INT
+	HOTELID INT,
+    GUESTNAME VARCHAR(255)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-
-select * from guest;
+insert into guestreview(`REVIEW`,`REVIEWTITLE`,`RATING`,`GUESTID`,`HOTELID`)
+values ()
+alter table GUESTREVIEW add  GUESTNAME VARCHAR(255) null
+select * from GUESTREVIEW;
 
 insert into guest(`guestname`,`guestemail`,`guestpassword`) values ("huy1","huyt71@gmail.com","12345");
 
@@ -92,19 +95,6 @@ insert into roomtype (`ROOMTYPE`) values ("TRIPLE");
 
 insert into ROOMSTATUS (`ROOMSTATUS`) values ("YES");
 insert into ROOMSTATUS (`ROOMSTATUS`) values ("NO");
-
-
-insert into room (`ROOMTYPEID`,`ROOMSTATUSID`,`COST`,`HOTELID`) values (1,1,150,13);
-insert into room (`ROOMTYPEID`,`ROOMSTATUSID`,`COST`,`HOTELID`) values (2,1,350,14);
-insert into room (`ROOMTYPEID`,`ROOMSTATUSID`,`COST`,`HOTELID`) values (3,2,450,13);
-insert into room (`ROOMTYPEID`,`ROOMSTATUSID`,`COST`,`HOTELID`) values (1,1,200,13);
-insert into room (`ROOMTYPEID`,`ROOMSTATUSID`,`COST`,`HOTELID`) values (2,2,350,13);
-insert into room (`ROOMTYPEID`,`ROOMSTATUSID`,`COST`,`HOTELID`) values (3,1,455,15);
-insert into room (`ROOMTYPEID`,`ROOMSTATUSID`,`COST`,`HOTELID`) values (3,1,455,13);
-insert into room (`ROOMTYPEID`,`ROOMSTATUSID`,`COST`,`HOTELID`) values (2,1,400,13);
-insert into room (`ROOMTYPEID`,`ROOMSTATUSID`,`COST`,`HOTELID`) values (3,2,350,16);
-insert into room (`ROOMTYPEID`,`ROOMSTATUSID`,`COST`,`HOTELID`) values (1,1,175,13);
-
 
 insert into hotel(`HOTELNAME`,`HOTELCOUNTRY`,`HOTELSTATE`,`HOTELCITY`,`HOTELPHONE`)
 values ("hotel1","hotelcontry1","hotelstate1","city1","13245");
@@ -116,18 +106,40 @@ insert into hotel(`HOTELNAME`,`HOTELCOUNTRY`,`HOTELSTATE`,`HOTELCITY`,`HOTELPHON
 values ("hotel3","hotelcontry3","hotelstate3","city3","132453");
 
 insert into hotel(`HOTELNAME`,`HOTELCOUNTRY`,`HOTELSTATE`,`HOTELCITY`,`HOTELPHONE`)
-values ("hotel14","hotelcontry14","hotelstate14","city14","132454");
+values ("hotel14","hotelcontry14","hotelstate14","city14","132454"); 
 
 
+insert into room (`ROOMTYPEID`,`ROOMSTATUSID`,`COST`,`HOTELID`) values (1,1,150,1);
+insert into room (`ROOMTYPEID`,`ROOMSTATUSID`,`COST`,`HOTELID`) values (2,1,350,2);
+insert into room (`ROOMTYPEID`,`ROOMSTATUSID`,`COST`,`HOTELID`) values (3,2,450,1);
+insert into room (`ROOMTYPEID`,`ROOMSTATUSID`,`COST`,`HOTELID`) values (1,1,200,1);
+insert into room (`ROOMTYPEID`,`ROOMSTATUSID`,`COST`,`HOTELID`) values (2,2,350,1);
+insert into room (`ROOMTYPEID`,`ROOMSTATUSID`,`COST`,`HOTELID`) values (3,1,455,3);
+insert into room (`ROOMTYPEID`,`ROOMSTATUSID`,`COST`,`HOTELID`) values (3,1,455,1);
+insert into room (`ROOMTYPEID`,`ROOMSTATUSID`,`COST`,`HOTELID`) values (2,1,400,1);
+insert into room (`ROOMTYPEID`,`ROOMSTATUSID`,`COST`,`HOTELID`) values (3,2,350,4);
+insert into room (`ROOMTYPEID`,`ROOMSTATUSID`,`COST`,`HOTELID`) values (1,1,175,1);
+
+
+
+
+
+update hotel set image = "img/800x600.png" where hotelid = 1;
+update hotel set image = "img/400x300.png" where hotelid = 2;
+update hotel set image = "img/300x300.png" where hotelid = 3;
+update hotel set image = "img/1200x500.png" where hotelid = 4;
+
+
+update hotel set description = "description1" where hotelid = 1;
+update hotel set description = "description2" where hotelid = 2;
+update hotel set description = "description3" where hotelid = 3;
+update hotel set description = "description14" where hotelid = 4;
 select * from room ;
 
 select * from hotel order by hotelname;
 
-alter table hotel add IMAGE varchar(256) null
-update hotel set image = "img/800x600.png" where hotelid = 13;
-update hotel set image = "img/400x300.png" where hotelid = 14;
-update hotel set image = "img/300x300.png" where hotelid = 15;
-update hotel set image = "img/1200x500.png" where hotelid = 16;
+alter table hotel add IMAGE varchar(256) null;
+
 
 select * from roomstatus ;-- 1 = available ,2 = booked
 
@@ -141,9 +153,6 @@ where r.hotelid = 16
 order by h.hotelid ;
 
 
-
-insert into reservation (`GUESTID`,`HOTELNAME`,`ROOMID`,`STARTDATE`,`ENDDATE`)
-values (1,"hotel1",1,20170101,20170103);
 
 
 

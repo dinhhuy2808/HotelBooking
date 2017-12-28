@@ -2,7 +2,7 @@ package com.hotelbooking.springmvcsecurity.model;
 
 import java.util.List;
 
-public class Hotel {
+public class Hotel  implements Cloneable{
 	public int hotelid;
 	public String hotelname;
 	public String hotelcountry;
@@ -67,5 +67,7 @@ public class Hotel {
 		this.description = description;
 	}
 	
-	
+	public Object clone()throws CloneNotSupportedException{  
+		return super.clone();  
+		}  
 }

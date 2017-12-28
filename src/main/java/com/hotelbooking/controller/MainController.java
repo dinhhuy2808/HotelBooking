@@ -32,7 +32,9 @@ public class MainController {
 	 @Autowired
 	    private HotelDAO hotelDAO;
 	 List<Hotel> hotels = new ArrayList<Hotel>();
+	 List<Hotel> hotels2 = new ArrayList<Hotel>();
 	 Hotel hotel = new Hotel();
+	 Hotel hotel2 = new Hotel();
 	Connection connection;
 	int startdate = 0;
 	int enddate = 0;
@@ -113,6 +115,7 @@ public class MainController {
 	   resdetail.setNumberofguest(guests);
 	   resdetail.setNumberofroom(rooms);
 	   hotels = hotelDAO.getAvailableHotels(resdetail, connection);
+	   hotels2 = hotelDAO.getAvailableHotels(resdetail, connection);
 	   System.out.println(hotels.size());
 	   model.addAttribute("hotels", hotels);
  
@@ -133,6 +136,12 @@ public class MainController {
 			   break;
 		   }
 	   }
+	   for(Hotel read:hotels2){
+		   if(read.hotelname.trim().equals(hotelname.trim())){
+			   hotel2 = read;
+			   break;
+		   }
+	   }
 	   List<Guestreview> list = hotelDAO.getReview(hotel.hotelid, connection);
 	   model.addAttribute("hotel",hotel);
 	   model.addAttribute("reviews",list);
@@ -145,8 +154,23 @@ public class MainController {
 		   				@RequestParam("reviewtitle") String reviewtitle,
 		   				@RequestParam("reviewtext") String reviewtext) {
 	   System.out.println(hotel.getHotelname());
+	   int rating = 0;
+	   	MyFilteredClassifier classifier;
+		
+		classifier = new MyFilteredClassifier();
+		classifier.load(reviewtext); 
+		classifier.loadModel("finaltrain1.model");
+		classifier.makeInstance();
+		classifier.classify();
 	   
-	   hotelDAO.insertReview(reviewtitle, reviewtext, hotel.hotelid, 0, principal.getName());
+		if(classifier.result.trim().equals("negative")){
+			rating = 1;
+		}else if (classifier.result.trim().equals("neutral")){
+			rating = 2;
+		}else{
+			rating = 3;
+		}
+	   hotelDAO.insertReview(reviewtitle, reviewtext, hotel.hotelid, 0, principal.getName(), rating /*rating*/);
 	   
        return "redirect:" +"detail?hotel="+hotel.getHotelname();
    }
@@ -155,13 +179,37 @@ public class MainController {
    public String payment(Model model, Principal principal,
 		   				@RequestParam("array") List<Integer> array) {
 	   System.out.println(hotel.getHotelname());
+	   
+	  /* try {
+		 hotel2 = (Hotel) hotel.clone();
+	} catch (CloneNotSupportedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}*/
+	   System.out.println(hotel2.hashCode()+"--"+hotel.hashCode());
 	   List<Reservation> listReserv = new ArrayList<Reservation>();
 	   int total = 0;
+		   for(Integer read:array){
+			   /*hotelDAO.insertReservation(userInfoDAO.getUserId(principal.getName(), connection), hotel.hotelname, read, startdate, enddate);*/
+			int i = 0;
+			while (i < hotel2.getRoom().size()){
+				  if(array.contains(hotel2.getRoom().get(i).getRoomid())){
+					  total += hotel2.getRoom().get(i).getCost();
+					  i++;
+					 
+				  }else{
+					  System.out.println("remove: "+hotel2.getRoom().get(i).getRoomid());
+					  hotel2.getRoom().remove(i);
+					  System.out.println(hotel2.getRoom().size());
+				  }
+		   }
+	   }
+		   
 		   for(Integer read:array){
 			   hotelDAO.insertReservation(userInfoDAO.getUserId(principal.getName(), connection), hotel.hotelname, read, startdate, enddate);
 			   int i = 0;
 			  while(i < hotel.getRoom().size()){
-				  if(hotel.getRoom().get(i).getRoomid() == read){
+				  if(!array.contains(hotel.getRoom().get(i).getRoomid())){
 					  total += hotel.getRoom().get(i).getCost();
 					  i++;
 					 
@@ -172,17 +220,27 @@ public class MainController {
 				  }
 		   }
 	   }
-		   System.out.println(hotel.getRoom().size());
+		   System.out.println(hotel2.getRoom().size());
 		   String night = minusDate(Integer.toString(startdate), Integer.toString(enddate));
 		   
 		   total =total * Integer.parseInt(night);
-		   model.addAttribute("hotel",hotel);
+		   model.addAttribute("hotel",hotel2);
 		   model.addAttribute("total",total);
 		   model.addAttribute("night",night);
 	   
        return "hotel-payment";
    }
-   
+   @RequestMapping(value = "/proceed", method=RequestMethod.POST)
+   public String proceed(Model model, Principal principal/*,
+		   				@RequestParam("number") String number,
+		   				@RequestParam("CVC") String CVC,
+		   				@RequestParam("holdername") String holdername,
+		   				@RequestParam("valid") String valid*/) {
+	   for(Room read : hotel2.getRoom()){
+		   hotelDAO.insertReservation(userInfoDAO.getUserId(principal.getName(), connection), hotel.hotelname, read.getRoomid(), startdate, enddate);
+	   }
+       return "sucess-payment";
+   }
    @RequestMapping(value = "/403", method = RequestMethod.GET)
    public String accessDenied(Model model, Principal principal) {
         

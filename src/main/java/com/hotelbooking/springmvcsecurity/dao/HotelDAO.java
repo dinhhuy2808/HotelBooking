@@ -12,7 +12,7 @@ public interface HotelDAO {
      
     public List<Hotel> getAvailableHotels(Resdetail resdetial, Connection conn );
     public void insertReview(String reviewTitle, String reviewText,int hotelid, int guestid,String guestname,Connection conn);
-    public void insertReview(String reviewTitle, String reviewText,int hotelid, int guestid,String guestname);
+    public void insertReview(String reviewTitle, String reviewText,int hotelid, int guestid,String guestname,int rating);
     public List<Guestreview> getReview(int hotelid,Connection conn);
     
     public void insertReservation(int guestid, String hotelname,int roomid, int startdate,int enddate);
